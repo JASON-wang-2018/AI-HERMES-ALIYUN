@@ -1,0 +1,41 @@
+# Python generated
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+venv/
+venv_browser/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+logs/
+*.log
+
+# Data
+data/
+database/*.json
+database/*.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large media/documents (uncomment if you want to include them)
+# *.pdf
+# *.xlsx
+# *.xls
