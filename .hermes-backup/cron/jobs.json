@@ -19,15 +19,15 @@
       "schedule_display": "0 18 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 4
+        "completed": 5
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T15:51:44.695859+08:00",
-      "next_run_at": "2026-05-04T18:00:00+08:00",
-      "last_run_at": "2026-05-01T18:05:39.724832+08:00",
+      "next_run_at": "2026-05-05T18:00:00+08:00",
+      "last_run_at": "2026-05-04T18:03:42.442244+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -60,15 +60,15 @@
       "schedule_display": "45 12 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 3
+        "completed": 4
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T15:59:00.234487+08:00",
-      "next_run_at": "2026-05-04T12:45:00+08:00",
-      "last_run_at": "2026-05-01T12:46:13.367039+08:00",
+      "next_run_at": "2026-05-05T12:45:00+08:00",
+      "last_run_at": "2026-05-04T12:45:57.543721+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -101,15 +101,15 @@
       "schedule_display": "15 17 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 4
+        "completed": 5
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T15:59:09.408370+08:00",
-      "next_run_at": "2026-05-04T17:15:00+08:00",
-      "last_run_at": "2026-05-01T17:16:15.955013+08:00",
+      "next_run_at": "2026-05-05T17:15:00+08:00",
+      "last_run_at": "2026-05-04T17:16:13.421570+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -142,15 +142,15 @@
       "schedule_display": "45 17 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 3
+        "completed": 4
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T21:29:50.145530+08:00",
-      "next_run_at": "2026-05-04T17:45:00+08:00",
-      "last_run_at": "2026-05-01T17:46:22.192838+08:00",
+      "next_run_at": "2026-05-05T17:45:00+08:00",
+      "last_run_at": "2026-05-04T17:46:19.178662+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -183,15 +183,15 @@
       "schedule_display": "30 17 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 3
+        "completed": 4
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T21:45:21.603577+08:00",
-      "next_run_at": "2026-05-04T17:30:00+08:00",
-      "last_run_at": "2026-05-01T17:30:49.421996+08:00",
+      "next_run_at": "2026-05-05T17:30:00+08:00",
+      "last_run_at": "2026-05-04T17:30:44.025492+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -224,15 +224,15 @@
       "schedule_display": "0 21 * * 1-5",
       "repeat": {
         "times": 999,
-        "completed": 3
+        "completed": 4
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T22:12:22.453198+08:00",
-      "next_run_at": "2026-05-04T21:00:00+08:00",
-      "last_run_at": "2026-05-01T21:07:10.969471+08:00",
+      "next_run_at": "2026-05-05T21:00:00+08:00",
+      "last_run_at": "2026-05-04T21:01:48.536387+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -265,15 +265,15 @@
       "schedule_display": "55 8 * * 1-5",
       "repeat": {
         "times": 999,
-        "completed": 3
+        "completed": 4
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T22:12:43.939861+08:00",
-      "next_run_at": "2026-05-04T08:55:00+08:00",
-      "last_run_at": "2026-05-01T08:58:54.738151+08:00",
+      "next_run_at": "2026-05-05T08:55:00+08:00",
+      "last_run_at": "2026-05-04T08:58:34.612115+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -306,15 +306,15 @@
       "schedule_display": "50 17 * * 1-5",
       "repeat": {
         "times": 999,
-        "completed": 3
+        "completed": 4
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T22:27:24.501326+08:00",
-      "next_run_at": "2026-05-04T17:50:00+08:00",
-      "last_run_at": "2026-05-01T17:52:22.166326+08:00",
+      "next_run_at": "2026-05-05T17:50:00+08:00",
+      "last_run_at": "2026-05-04T17:54:12.534625+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -347,15 +347,15 @@
       "schedule_display": "45 12 * * 1-5",
       "repeat": {
         "times": 999,
-        "completed": 3
+        "completed": 4
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T22:29:01.150300+08:00",
-      "next_run_at": "2026-05-04T12:45:00+08:00",
-      "last_run_at": "2026-05-01T12:48:48.829973+08:00",
+      "next_run_at": "2026-05-05T12:45:00+08:00",
+      "last_run_at": "2026-05-04T12:50:49.360680+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -388,15 +388,15 @@
       "schedule_display": "0 2 * * *",
       "repeat": {
         "times": null,
-        "completed": 4
+        "completed": 5
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-29T12:43:16.910050+08:00",
-      "next_run_at": "2026-05-04T02:00:00+08:00",
-      "last_run_at": "2026-05-03T02:01:04.034445+08:00",
+      "next_run_at": "2026-05-05T02:00:00+08:00",
+      "last_run_at": "2026-05-04T02:00:53.261380+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -429,15 +429,15 @@
       "schedule_display": "0 8 * * *",
       "repeat": {
         "times": null,
-        "completed": 4
+        "completed": 5
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-29T12:43:39.059384+08:00",
-      "next_run_at": "2026-05-04T08:00:00+08:00",
-      "last_run_at": "2026-05-03T08:02:06.928396+08:00",
+      "next_run_at": "2026-05-05T08:00:00+08:00",
+      "last_run_at": "2026-05-04T08:00:50.081610+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -470,15 +470,15 @@
       "schedule_display": "10 8 * * *",
       "repeat": {
         "times": null,
-        "completed": 4
+        "completed": 5
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-29T12:43:47.620025+08:00",
-      "next_run_at": "2026-05-04T08:10:00+08:00",
-      "last_run_at": "2026-05-03T08:10:42.424353+08:00",
+      "next_run_at": "2026-05-05T08:10:00+08:00",
+      "last_run_at": "2026-05-04T08:11:28.965780+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -511,15 +511,15 @@
       "schedule_display": "20 8 * * *",
       "repeat": {
         "times": null,
-        "completed": 4
+        "completed": 5
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-29T12:43:56.198937+08:00",
-      "next_run_at": "2026-05-04T08:20:00+08:00",
-      "last_run_at": "2026-05-03T08:21:10.792586+08:00",
+      "next_run_at": "2026-05-05T08:20:00+08:00",
+      "last_run_at": "2026-05-04T08:21:04.347334+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -577,7 +577,7 @@
     {
       "id": "5f5b68f94455",
       "name": "\ud83d\udce6 GitHub \u6bcf\u5468\u5907\u4efd",
-      "prompt": "## \u4efb\u52a1\uff1a\u6bcf\u5468\u4e8c\u51cc\u6668\u5907\u4efd stock_knowledge \u5230 GitHub\n\n### \u5907\u4efd\u8303\u56f4\uff08\u5df2\u5b8c\u5584 .gitignore\uff09\n\u6392\u9664\uff1avenv/\u3001venv_browser/\u3001.venv/\u3001*.db\u3001*.sqlite\u3001logs/\u3001data/\u3001database/*.json/*.csv\n\u4fdd\u7559\uff1aknowledge_base/\u3001model_base/\u3001scripts/\u3001src/\u3001pyproject.toml \u7b49\u4ee3\u7801\u548c\u914d\u7f6e\n\n### \u6267\u884c\u6b65\u9aa4\n```bash\ncd ~/stock_knowledge\n\n# \u68c0\u67e5\u662f\u5426\u6709\u53d8\u66f4\nif git diff --quiet && git diff --cached --quiet && git status --porcelain | grep -qv \"^??\"; then\n  echo \"No changes to commit\"\n  exit 0\nfi\n\n# \u6dfb\u52a0\u6240\u6709\u53d8\u66f4\u6587\u4ef6\ngit add -A\n\n# \u68c0\u67e5\u662f\u5426\u6709\u5b9e\u9645\u8981\u63d0\u4ea4\u7684\u5185\u5bb9\nif git diff --cached --quiet; then\n  echo \"Nothing to commit\"\n  exit 0\nfi\n\n# \u63d0\u4ea4\uff08\u663e\u793a\u53d8\u66f4\u7edf\u8ba1\uff09\ngit commit -m \"Backup $(date +%Y-%m-%d\\ %H:%M)\n\n\u53d8\u66f4\u6587\u4ef6:\n$(git diff --cached --stat | tail -5)\"\n\n# \u63a8\u9001\u5230 GitHub\ngit push origin master\n\necho \"Backup completed at $(date)\"\n```",
+      "prompt": "## \u4efb\u52a1\uff1a\u6bcf\u5468\u4e8c\u51cc\u6668\u5907\u4efd stock_knowledge \u5230 GitHub\n\n### \u5907\u4efd\u8303\u56f4\n**\u4ee3\u7801\u76ee\u5f55**\uff08\u5df2\u5728 .gitignore \u6392\u9664 venv/db/logs \u7b49\uff09\uff1a\n- knowledge_base/\n- model_base/\n- scripts/\n- src/\n- pyproject.toml \u7b49\u914d\u7f6e\n\n**Hermes Agent \u914d\u7f6e**\uff08\u5907\u4efd\u5230 .hermes-backup/\uff09\uff1a\n- skills/a-stock-analysis/\n- skills/a-stock-daily-report/\n- skills/self-improving/\n- scripts/*.py\uff08hermes \u76f8\u5173\uff09\n- cron/jobs.json\n- SOUL.md\n\n### \u6267\u884c\u6b65\u9aa4\n```bash\ncd ~/stock_knowledge\n\n# \u540c\u6b65\u6700\u65b0 skills/scripts/cron \u5230 .hermes-backup/\nmkdir -p .hermes-backup/{skills,scripts,cron}\n\ncp -r ~/.hermes/skills/a-stock-analysis ~/.hermes/skills/a-stock-daily-report ~/.hermes/skills/meta/self-improving .hermes-backup/skills/ 2>/dev/null\ncp ~/.hermes/scripts/*.py .hermes-backup/scripts/ 2>/dev/null\ncp ~/.hermes/cron/jobs.json .hermes-backup/cron/ 2>/dev/null\ncp ~/.hermes/SOUL.md .hermes-backup/ 2>/dev/null\n\n# \u68c0\u67e5\u662f\u5426\u6709\u53d8\u66f4\nif git diff --quiet && git diff --cached --quiet && git status --porcelain | grep -qv \"^??\"; then\n  echo \"No changes to commit\"\n  exit 0\nfi\n\ngit add -A\n\nif git diff --cached --quiet; then\n  echo \"Nothing to commit\"\n  exit 0\nfi\n\ngit commit -m \"Backup $(date +%Y-%m-%d\\ %H:%M)\n\n\u53d8\u66f4\u6587\u4ef6:\n$(git diff --cached --stat | tail -10)\"\n\ngit push origin master\n\necho \"Backup completed at $(date)\"\n```",
       "skills": [],
       "skill": null,
       "model": null,
@@ -600,7 +600,7 @@
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-05-03T19:09:47.757759+08:00",
-      "next_run_at": "2026-05-05T01:00:00+08:00",
+      "next_run_at": "2026-05-12T01:00:00+08:00",
       "last_run_at": null,
       "last_status": null,
       "last_error": null,
@@ -616,5 +616,5 @@
       "workdir": null
     }
   ],
-  "updated_at": "2026-05-03T19:09:47.758884+08:00"
+  "updated_at": "2026-05-05T01:00:53.678507+08:00"
 }

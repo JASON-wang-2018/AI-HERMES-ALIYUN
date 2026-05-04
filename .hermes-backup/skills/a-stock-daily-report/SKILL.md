@@ -24,6 +24,12 @@ category: productivity
 
 ### 表结构
 
+**实际DB路径**：
+- `stock_data.db` → `/home/admin/stock_knowledge/database/stock_data.db`
+- `daily_market.db` → `/home/admin/stock_knowledge/database/daily_market.db`
+
+> ⚠️ `daily_market.db` 中的表为：`daily_index`, `daily_sector`, `daily_review`, `sector_moneyflow`, `daily_market`。其中 `daily_review` 表存储财联社午评/收评/焦点复盘内容，`data_kanpan` 和 `tomorrow_themes` 表实际位于 `stock_data.db`。
+
 ```sql
 -- 主要指数日行情
 CREATE TABLE daily_index (
@@ -70,7 +76,7 @@ CREATE TABLE tomorrow_themes (
     created_at TEXT
 );
 
-> ⚠️ `data_kanpan` 表和 `tomorrow_themes` 表实际位于 `stock_data.db`（路径 `~/stock_knowledge/database/stock_data.db`），而非 `daily_market.db`。实际 `daily_market.db` 中的表为：`daily_index`, `daily_sector`, `daily_review`, `sector_moneyflow`, `daily_market`。明日主题前瞻入 `tomorrow_themes` 表时，DB路径用 `stock_data.db`。
+> ⚠️ `data_kanpan` 表和 `tomorrow_themes` 表实际位于 `stock_data.db`，明日主题前瞻入 `tomorrow_themes` 表时，DB路径用 `stock_data.db`。
 
 -- 东财板块主力资金流
 CREATE TABLE sector_moneyflow (
@@ -316,6 +322,40 @@ print(f"今日文章ID: {today_id}")
 title_match = re.search(r'【数据看盘】([^<]+)</a>', snippet)
 brief_match = re.search(r'subject-interest-brief[^>]*>([^<]+)', snippet)
 ```
+
+#### 数据看盘详情页内容提取（推荐方法，2026-05实测）
+
+**⚠️ 重要**：CLS API (`api3.cls.cn`) 和 `__NEXT_DATA__` JSON 对列表页抓取均返回空数据（`errno:50101`）。**直接抓详情页 + HTML标签剥离** 是最可靠方法：
+
+```python
+import urllib.request, re
+
+url = "https://www.cls.cn/detail/2361202"
+req = urllib.request.Request(url, headers={
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+    'Accept-Language': 'zh-CN,zh;q=0.9',
+})
+with urllib.request.urlopen(req, timeout=10) as resp:
+    html = resp.read().decode('utf-8', errors='replace')
+
+# 方案A：直接strip HTML标签提取正文（最可靠）
+text = re.sub(r'<[^>]+>', ' ', html)
+text = re.sub(r'\s+', ' ', text)
+
+# 找到文章起始位置
+idx = text.find('数据看盘')
+article = text[idx:idx+5000]
+
+# 方案B：从 __NEXT_DATA__ JSON提取（articleDetail.content含完整HTML正文）
+nuxt_match = re.search(r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>', html, re.DOTALL)
+if nuxt_match:
+    import json
+    data = json.loads(nuxt_match.group(1))
+    content = data['props']['initialState']['detail']['articleDetail'].get('content', '')
+    # HTML标签剥离同上
+```
+
+注意：文章发布日期（2026-04-30）不一定是当天（2026-05-04），**数据看盘通常在交易日后次日17:44发布**，入库字段用文章实际日期 `article_date`。
 
 #### 数据看盘内容结构（列表页JSON嵌入式提取）
 
