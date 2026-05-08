@@ -38,7 +38,8 @@ class RisingWaveAnalyzer:
             code = 'sz.' + code if code.startswith('0') else 'sh.' + code
 
         end = datetime.now().strftime('%Y-%m-%d')
-        start = (datetime.now() - timedelta(days=60)).strftime('%Y-%m-%d')
+        # 标准窗口240天（约1年），确保所有指标数据充足
+        start = (datetime.now() - timedelta(days=240)).strftime('%Y-%m-%d')
 
         rs = bs.query_history_k_data_plus(code,
             'date,open,high,low,close,volume,turn,pctChg',
