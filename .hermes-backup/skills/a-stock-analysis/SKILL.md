@@ -61,13 +61,18 @@ import baostock as bs
 import numpy as np
 import subprocess, json, urllib.parse
 
-code = '002457'  # ← 改这里
-prefix = 'sz' if code.startswith(('0','2','3')) else 'sh'
+from datetime import datetime, timedelta
+_code = '002457'  # ← 改这里
+_end = datetime.now().strftime('%Y-%m-%d')
+_start240 = (datetime.now() - timedelta(days=240)).strftime('%Y-%m-%d')
+_start60 = (datetime.now() - timedelta(days=60)).strftime('%Y-%m-%d')
+
+prefix = 'sz' if _code.startswith(('0','2','3')) else 'sh'
 
 bs.login()
-rs = bs.query_history_k_data_plus(f'{prefix}.{code}',
-    'date,open,high,low,close,volume,amount,pctChg',
-    start_date='2026-02-01', end_date='2026-04-28',
+rs = bs.query_history_k_data_plus(f'{prefix}.{_code}',
+    'date,open,high,low,close,volume,amount,pctChg,turn',
+    start_date=_start240, end_date=_end,
     frequency='d', adjustflag='2')
 data = []
 while rs.next():
@@ -392,7 +397,15 @@ print(f"MAIN_STAGE:{main_stage}")
 - 通达信XLS列名因版本而异，**不要依赖固定的列索引映射**。实际用 `df.columns.tolist()` 确认。实测881394证券板块.xls列名：`['时间','开盘','最高','最低','收盘','成交量','MA58.MA5','MA58.MA10','MA58.MA20','MA58.MA60','MA58.MA120','VOL88.VOLUME','VOL88.VOL5','VOL88.VOL10','VOL88.VOL120','VOL88.VOL60','VOL88.~比例','RSI8.RSI1','RSI8.RSI2','RSI8.RSI3']`
 - 注意清理：文件末尾可能有"#数据来源:通达信"等说明行，用 `df[df['时间'].str.match(r'\d{4}/\d{2}/\d{2}')]` 过滤
 - TDX板块数据（如881394证券）的MA和RSI列名前缀带指标ID（如MA58.、RSI8.），成交量列可能原始值就是手为单位，无需/100还原
-- 节前（五一/十一假期前）提高路径三(回调)概率，提醒轻仓/空仓
+- ⚠️ **节前建议必须先确认当前日期**：用`datetime.now()`判断今天距离假期还有几个交易日，避免把"节前建议"套到已经开市的日期。例如：五一假期5月1-5日，**5月6日起已正常开市**，不能再写"节前轻仓"。判断逻辑：
+  ```python
+  from datetime import datetime
+  today = datetime.now().date()
+  # 五一：5月1-5日 → 4月30日前才算节前，5月6日起不算
+  # 十一：10月1-7日 → 9月30日前才算节前，10月8日起不算
+  is_before_holiday = (month, day) in [(4,30),(9,30)]  # 简单判断
+  ```
+  **每次做持仓策略和风控时，都必须先确认日期，再决定要不要写假期建议。**
 - 东财curl实时API可绕过浏览器限制（容器内Chrome无法启动，但curl可用）；优先顺序：Baostock日K > 东财curl实时 > Tushare > AKShare
 - AKShare网络不稳定（RemoteDisconnected高频），需加try/except
 - Baostock日期格式必须是YYYY-MM-DD，adjustflag='2'为前复权

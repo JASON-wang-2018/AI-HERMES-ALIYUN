@@ -202,14 +202,170 @@ def fetch_index_data() -> dict:
 # ══════════════════════════════════════════════════════════
 
 def load_ztfp(date_str: str) -> dict:
-    """读取今日涨停复盘JSON，无则返回{}"""
+    """读取今日涨停复盘JSON，无则返回{}
+    改进：若JSON不存在，尝试从东方财富API实时抓取摘要数据
+    """
     date_clean = date_str.replace("-", "")
     path = REPORTS_DIR / f"涨停复盘_完整_{date_clean}.json"
     if path.exists():
         return load_json(path)
     # 备选：非完整版
     path2 = REPORTS_DIR / f"涨停复盘_{date_clean}.json"
-    return load_json(path2)
+    if path2.exists():
+        return load_json(path2)
+    # JSON不存在，尝试从东方财富API实时抓取摘要
+    return fetch_ztfp_summary_from_api(date_str)
+
+
+# ══════════════════════════════════════════════════════════
+# 数据源4b：涨停复盘实时API（JSON不存在时的备援）
+# ══════════════════════════════════════════════════════════
+
+def fetch_ztfp_summary_from_api(date_str: str) -> dict:
+    """
+    从东方财富搜索API实时抓取涨停复盘摘要（当日JSON不存在时的备援）
+    返回结构兼容 load_ztfp 的完整JSON格式
+    """
+    import urllib.parse
+    import time
+
+    results = {
+        "date": date_str,
+        "collected_at": ts_now(),
+        "午间涨停复盘": None,
+        "收盘涨停复盘": None,
+        "涨停股详细列表": [],
+    }
+
+    # 搜索收盘涨停复盘
+    keyword = f"{date_str[5:7].lstrip('0')}月{date_str[8:].lstrip('0')}日涨停复盘"
+    param = {
+        "uid": "", "keyword": keyword, "type": ["cmsArticle"],
+        "client": "web", "clientVersion": "curr", "clientType": "web",
+        "param": {
+            "cmsArticle": {
+                "searchScope": "default", "sort": "default",
+                "pageIndex": 1, "pageSize": 5,
+                "preTag": "<em>", "postTag": "</em>"
+            }
+        }
+    }
+    encoded = urllib.parse.quote(json.dumps(param, ensure_ascii=False), safe='')
+    url = f"https://search-api-web.eastmoney.com/search/jsonp?cb=jQuery&param={encoded}"
+
+    try:
+        proc = subprocess.run(
+            ['curl', '-s', '-A', 'Mozilla/5.0', url],
+            capture_output=True, text=True, timeout=15
+        )
+        data = proc.stdout
+        json_str = re.sub(r'^jQuery\(|\)$', '', data)
+        parsed = json.loads(json_str)
+        articles = parsed.get('result', {}).get('cmsArticle', [])
+    except Exception as e:
+        print(f"  [WARNING] 涨停复盘API搜索失败: {e}")
+        return results
+
+    # 收盘涨停复盘
+    for art in articles:
+        title = re.sub(r'<[^>]+>', '', art.get('title', ''))
+        if '午间' not in title and '涨停复盘' in title:
+            text = art.get('content', '')
+            zt_count = 0
+            fbl = 0.0
+            chuji = 0
+            # 解析涨停总数
+            m = re.search(r'共计?(\d+)股?涨停', text)
+            if m:
+                zt_count = int(m.group(1))
+            # 解析封板率
+            m = re.search(r'封板率([\d.]+)%?', text)
+            if m:
+                fbl = float(m.group(1))
+            # 解析触及涨停
+            m = re.search(r'(\d+)只个股?盘中一度?触及?涨停', text)
+            if m:
+                chuji = int(m.group(1))
+            # 解析连板龙头
+            lianban = ""
+            m = re.search(r'([\u4e00-\u9fa5]{2,8}\d+天\d+板)', text)
+            if m:
+                lianban = m.group(1)
+            results["收盘涨停复盘"] = {
+                "title": title,
+                "date": art.get('date', ''),
+                "url": f"https://finance.eastmoney.com/a/{art.get('code', '')}.html",
+                "media": art.get('mediaName', ''),
+                "summary": {
+                    "涨停总数": zt_count,
+                    "封板率": fbl,
+                    "触及涨停": chuji,
+                    "连板龙头": lianban,
+                },
+                "full_text": text,
+            }
+            break
+
+    time.sleep(1)
+
+    # 搜索午间涨停复盘（不带日期更稳定）
+    param2 = {
+        "uid": "", "keyword": "午间涨停复盘", "type": ["cmsArticle"],
+        "client": "web", "clientVersion": "curr", "clientType": "web",
+        "param": {
+            "cmsArticle": {
+                "searchScope": "default", "sort": "default",
+                "pageIndex": 1, "pageSize": 10,
+                "preTag": "<em>", "postTag": "</em>"
+            }
+        }
+    }
+    encoded2 = urllib.parse.quote(json.dumps(param2, ensure_ascii=False), safe='')
+    url2 = f"https://search-api-web.eastmoney.com/search/jsonp?cb=jQuery&param={encoded2}"
+
+    try:
+        proc2 = subprocess.run(
+            ['curl', '-s', '-A', 'Mozilla/5.0', url2],
+            capture_output=True, text=True, timeout=15
+        )
+        data2 = proc2.stdout
+        json_str2 = re.sub(r'^jQuery\(|\)$', '', data2)
+        parsed2 = json.loads(json_str2)
+        articles2 = parsed2.get('result', {}).get('cmsArticle', [])
+    except Exception as e:
+        print(f"  [WARNING] 午间涨停复盘API搜索失败: {e}")
+        return results
+
+    for art in articles2:
+        art_date = art.get('date', '')[:10]
+        if art_date == date_str.replace('-', ''):
+            text = art.get('content', '')
+            zt_count = 0
+            fbl = 0.0
+            m = re.search(r'共计?(\d+)股?涨停', text)
+            if m:
+                zt_count = int(m.group(1))
+            m = re.search(r'封板率([\d.]+)%?', text)
+            if m:
+                fbl = float(m.group(1))
+            results["午间涨停复盘"] = {
+                "title": re.sub(r'<[^>]+>', '', art.get('title', '')),
+                "date": art.get('date', ''),
+                "url": f"https://finance.eastmoney.com/a/{art.get('code', '')}.html",
+                "media": art.get('mediaName', ''),
+                "summary": {
+                    "涨停总数": zt_count,
+                    "封板率": fbl,
+                    "触及涨停": 0,
+                    "连板龙头": "",
+                },
+                "full_text": text,
+            }
+            break
+
+    print(f"  [API备援] 收盘涨停: {results['收盘涨停复盘']['summary']['涨停总数'] if results.get('收盘涨停复盘') else '无'} 只 "
+          f"午间涨停: {results['午间涨停复盘']['summary']['涨停总数'] if results.get('午间涨停复盘') else '无'} 只")
+    return results
 
 
 # ══════════════════════════════════════════════════════════
@@ -298,6 +454,67 @@ def calc_sentiment(ztfp_data: dict) -> dict:
         "lianban": lianban,
         "warning": warning,
     }
+
+
+# ══════════════════════════════════════════════════════════
+# 数据源6：涨跌停市场统计（东方财富AKShare数据）
+# ══════════════════════════════════════════════════════════
+
+def fetch_zt_dt_count(date_str: str = None) -> dict:
+    """
+    抓取全市场涨跌停统计数据
+    使用东方财富AKShare接口：ak.stock_zt_pool_em() + ak.stock_zt_pool_dt_em()
+    返回: {zt_count, dt_count, zbgc_rate, zt_dt_ratio}
+    """
+    try:
+        import pandas as pd
+        import akshare as ak
+
+        date_id = date_str.replace("-", "") if date_str else None
+
+        # 涨停池
+        try:
+            zt_df = ak.stock_zt_pool_em(date=date_id) if date_id else ak.stock_zt_pool_em()
+            zt_count = len(zt_df)
+        except Exception as e:
+            print(f"  [WARNING] 涨停池获取失败: {e}")
+            zt_count = 0
+            zt_df = pd.DataFrame()
+
+        # 跌停池（使用正确的AKShare函数名）
+        try:
+            dt_df = ak.stock_zt_pool_dtgc_em(date=date_id) if date_id else ak.stock_zt_pool_dtgc_em()
+            dt_count = len(dt_df)
+        except Exception as e:
+            print(f"  [WARNING] 跌停池获取失败: {e}")
+            dt_count = 0
+            dt_df = pd.DataFrame()
+
+        # 炸板池（用于计算炸板率）
+        try:
+            zbgc_df = ak.stock_zt_pool_zbgc_em(date=date_id) if date_id else ak.stock_zt_pool_zbgc_em()
+            zbgc_count = len(zbgc_df)
+        except Exception as e:
+            zbgc_count = 0
+
+        # 涨停/跌停比
+        zt_dt_ratio = round(zt_count / dt_count, 1) if dt_count > 0 else float('inf')
+
+        # 炸板率 = 炸板数 / (涨停数 + 炸板数)
+        zbgc_rate = round(zbgc_count / (zt_count + zbgc_count) * 100, 1) if (zt_count + zbgc_count) > 0 else 0
+
+        print(f"  [涨跌停统计] 涨停:{zt_count} 跌停:{dt_count} 炸板:{zbgc_count} 炸板率:{zbgc_rate}% 涨跌停比:{zt_dt_ratio}")
+
+        return {
+            "zt_count": zt_count,
+            "dt_count": dt_count,
+            "zbgc_count": zbgc_count,
+            "zbgc_rate": zbgc_rate,
+            "zt_dt_ratio": zt_dt_ratio,
+        }
+    except Exception as e:
+        print(f"  [ERROR] 涨跌停数据获取失败: {e}")
+        return {"zt_count": 0, "dt_count": 0, "zbgc_count": 0, "zbgc_rate": 0, "zt_dt_ratio": 0}
 
 
 # ══════════════════════════════════════════════════════════
@@ -393,8 +610,19 @@ def generate_report_text(date_str: str, data: dict) -> str:
 
     # ── 二、市场情绪温度 ──────────────────────────────────
     add(f"【二、市场情绪】  {sent.get('label', '')}")
-    add(f"  涨停总数: {sent.get('zt_count', 0)}只  封板率: {sent.get('fbl', 0):.1f}%  "
-        f"连板龙头: {sent.get('lianban', '—')}")
+    zt_dt = data.get("zt_dt", {})
+    zt_count_em = zt_dt.get("zt_count", 0)
+    dt_count_em = zt_dt.get("dt_count", 0)
+    zbgc_rate = zt_dt.get("zbgc_rate", 0)
+    zt_dt_ratio = zt_dt.get("zt_dt_ratio", 0)
+    # 优先用AKShare实时数据，否则用涨停复盘数据
+    display_zt = zt_count_em if zt_count_em > 0 else sent.get('zt_count', 0)
+    display_dt = dt_count_em
+    zt_ratio_str = f"{zt_dt_ratio:.1f}" if zt_dt_ratio != float('inf') else "∞"
+    add(f"  涨停总数: {display_zt}只  跌停: {display_dt}只  封板率: {sent.get('fbl', 0):.1f}%  "
+        f"涨跌停比: {zt_ratio_str}x  连板龙头: {sent.get('lianban', '—')}")
+    if zbgc_rate > 0:
+        add(f"  炸板数: {zt_dt.get('zbgc_count', 0)}只  炸板率: {zbgc_rate}%")
     if sent.get("warning"):
         add(f"  {sent['warning']}")
     # 换手率
@@ -551,8 +779,14 @@ def run(date_str=None):
     print(f"[5/6] 读取财经早餐...")
     cj = load_caijing_breakfast(date_str)
 
-    print(f"[6/6] 计算情绪评分...")
+    print(f"[6/6] 采集涨跌停统计 & 计算情绪评分...")
+    zt_dt = fetch_zt_dt_count(date_str)
     sentiment = calc_sentiment(ztfp)
+
+    # 若涨停复盘已有封板率数据，优先保留；否则用AKShare炸板率
+    if zt_dt.get("zbgc_rate", 0) > 0 and sentiment.get("fbl", 0) == 0:
+        sentiment["fbl"] = zt_dt["zbgc_rate"]
+
     turnover = fetch_market_turnover(index_data)
 
     # 汇总数据
@@ -566,6 +800,7 @@ def run(date_str=None):
         "sentiment": sentiment,
         "turnover": turnover,
         "caijing": cj,
+        "zt_dt": zt_dt,
     }
 
     # 生成文本报告

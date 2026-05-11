@@ -1,0 +1,1163 @@
+{
+  "date": "2026-05-08",
+  "collected_at": "2026-05-09 03:27:24",
+  "午间涨停复盘": {
+    "title": "5月8日午间涨停复盘：90股涨停 共达电声5天3板",
+    "date": "2026-05-08 12:23:16",
+    "url": "https://finance.eastmoney.com/a/202605083731309383.html",
+    "summary": {
+      "涨停总数": 90,
+      "封板率": 73.17,
+      "触及涨停": 33
+    },
+    "full_text": "涨停个股数量方面，今日午盘共计90股涨停，另有33只个股盘中一度触及涨停，封板率73.17%。　　"
+  },
+  "收盘涨停复盘": {
+    "title": "5月8日涨停复盘：126只股涨停 共达电声5天3板",
+    "date": "2026-05-08 16:40:03",
+    "url": "https://finance.eastmoney.com/a/202605083731508431.html",
+    "media": "东方财富Choice数据",
+    "summary": {
+      "涨停总数": 126,
+      "封板率": 76.83,
+      "触及涨停": 38
+    },
+    "full_text": "涨停个股数量方面，今日共计126股涨停，另有38只个股盘中一度触及涨停，封板率76.83%。　　"
+  },
+  "涨停股详细列表": [
+    {
+      "code": "600673",
+      "name": "东阳光",
+      "close": 38.94,
+      "turnover": 0.38,
+      "seal_amount": 3238.82,
+      "seal_fund": 126119.51,
+      "industry": "综合"
+    },
+    {
+      "code": "000066",
+      "name": "中国长城",
+      "close": 21.8,
+      "turnover": 1.2,
+      "seal_amount": 5369.35,
+      "seal_fund": 117051.9,
+      "industry": "计算机"
+    },
+    {
+      "code": "002156",
+      "name": "通富微电",
+      "close": 56.95,
+      "turnover": 2.96,
+      "seal_amount": 1938.38,
+      "seal_fund": 110390.55,
+      "industry": "电子"
+    },
+    {
+      "code": "001309",
+      "name": "德明利",
+      "close": 577.29,
+      "turnover": 4.89,
+      "seal_amount": 161.84,
+      "seal_fund": 93428.15,
+      "industry": "电子"
+    },
+    {
+      "code": "601991",
+      "name": "大唐发电",
+      "close": 4.58,
+      "turnover": 2.66,
+      "seal_amount": 9547.22,
+      "seal_fund": 43726.28,
+      "industry": "公用事业"
+    },
+    {
+      "code": "002217",
+      "name": "合力泰",
+      "close": 3.18,
+      "turnover": 7.76,
+      "seal_amount": 9683.38,
+      "seal_fund": 30793.16,
+      "industry": "电子"
+    },
+    {
+      "code": "002081",
+      "name": "金螳螂",
+      "close": 6.49,
+      "turnover": 10.22,
+      "seal_amount": 3533.36,
+      "seal_fund": 22931.49,
+      "industry": "建筑装饰"
+    },
+    {
+      "code": "002044",
+      "name": "美年健康",
+      "close": 5.97,
+      "turnover": 3.27,
+      "seal_amount": 3584.01,
+      "seal_fund": 21396.53,
+      "industry": "医药生物"
+    },
+    {
+      "code": "000783",
+      "name": "长江证券",
+      "close": 8.79,
+      "turnover": 4.97,
+      "seal_amount": 2320.54,
+      "seal_fund": 20397.55,
+      "industry": "非银金融"
+    },
+    {
+      "code": "000338",
+      "name": "潍柴动力",
+      "close": 34.32,
+      "turnover": 2.46,
+      "seal_amount": 567.4,
+      "seal_fund": 19473.2,
+      "industry": "汽车"
+    },
+    {
+      "code": "002015",
+      "name": "协鑫能科",
+      "close": 19.53,
+      "turnover": 10.05,
+      "seal_amount": 959.0,
+      "seal_fund": 18729.34,
+      "industry": "公用事业"
+    },
+    {
+      "code": "603399",
+      "name": "永杉锂业",
+      "close": 21.33,
+      "turnover": 1.49,
+      "seal_amount": 874.41,
+      "seal_fund": 18651.25,
+      "industry": "有色金属"
+    },
+    {
+      "code": "000620",
+      "name": "盈新发展",
+      "close": 3.08,
+      "turnover": 3.52,
+      "seal_amount": 5727.0,
+      "seal_fund": 17639.17,
+      "industry": "房地产"
+    },
+    {
+      "code": "688069",
+      "name": "德林海",
+      "close": 46.8,
+      "turnover": 1.29,
+      "seal_amount": 340.95,
+      "seal_fund": 15956.27,
+      "industry": "环保"
+    },
+    {
+      "code": "001287",
+      "name": "中电港",
+      "close": 29.11,
+      "turnover": 11.46,
+      "seal_amount": 544.72,
+      "seal_fund": 15856.8,
+      "industry": "电子"
+    },
+    {
+      "code": "002364",
+      "name": "中恒电气",
+      "close": 44.87,
+      "turnover": 13.02,
+      "seal_amount": 349.12,
+      "seal_fund": 15664.85,
+      "industry": "电力设备"
+    },
+    {
+      "code": "601016",
+      "name": "节能风电",
+      "close": 4.69,
+      "turnover": 9.78,
+      "seal_amount": 3286.93,
+      "seal_fund": 15415.72,
+      "industry": "公用事业"
+    },
+    {
+      "code": "002290",
+      "name": "禾盛新材",
+      "close": 89.41,
+      "turnover": 2.73,
+      "seal_amount": 150.98,
+      "seal_fund": 13498.76,
+      "industry": "家用电器"
+    },
+    {
+      "code": "600396",
+      "name": "华电辽能",
+      "close": 10.91,
+      "turnover": 21.79,
+      "seal_amount": 1203.99,
+      "seal_fund": 13135.53,
+      "industry": "公用事业"
+    },
+    {
+      "code": "600379",
+      "name": "宝光股份",
+      "close": 18.46,
+      "turnover": 8.12,
+      "seal_amount": 686.46,
+      "seal_fund": 12672.08,
+      "industry": "电力设备"
+    },
+    {
+      "code": "600730",
+      "name": "*ST高科",
+      "close": 9.42,
+      "turnover": 0.21,
+      "seal_amount": 1318.29,
+      "seal_fund": 12418.3,
+      "industry": "社会服务"
+    },
+    {
+      "code": "002149",
+      "name": "西部材料",
+      "close": 69.86,
+      "turnover": 14.01,
+      "seal_amount": 172.2,
+      "seal_fund": 12030.14,
+      "industry": "有色金属"
+    },
+    {
+      "code": "688258",
+      "name": "卓易信息",
+      "close": 144.49,
+      "turnover": 6.34,
+      "seal_amount": 81.22,
+      "seal_fund": 11735.49,
+      "industry": "计算机"
+    },
+    {
+      "code": "000815",
+      "name": "美利云",
+      "close": 20.92,
+      "turnover": 11.79,
+      "seal_amount": 541.98,
+      "seal_fund": 11338.19,
+      "industry": "计算机"
+    },
+    {
+      "code": "601778",
+      "name": "晶科科技",
+      "close": 7.15,
+      "turnover": 13.6,
+      "seal_amount": 1566.51,
+      "seal_fund": 11200.56,
+      "industry": "公用事业"
+    },
+    {
+      "code": "603618",
+      "name": "杭电股份",
+      "close": 31.09,
+      "turnover": 3.83,
+      "seal_amount": 354.12,
+      "seal_fund": 11009.61,
+      "industry": "电力设备"
+    },
+    {
+      "code": "002792",
+      "name": "通宇通讯",
+      "close": 48.03,
+      "turnover": 12.96,
+      "seal_amount": 226.77,
+      "seal_fund": 10891.96,
+      "industry": "通信"
+    },
+    {
+      "code": "605303",
+      "name": "园林股份",
+      "close": 25.45,
+      "turnover": 2.59,
+      "seal_amount": 420.72,
+      "seal_fund": 10707.22,
+      "industry": "建筑装饰"
+    },
+    {
+      "code": "600113",
+      "name": "浙江东日",
+      "close": 49.15,
+      "turnover": 1.14,
+      "seal_amount": 206.46,
+      "seal_fund": 10147.6,
+      "industry": "商贸零售"
+    },
+    {
+      "code": "002418",
+      "name": "康盛股份",
+      "close": 6.2,
+      "turnover": 6.86,
+      "seal_amount": 1603.02,
+      "seal_fund": 9938.72,
+      "industry": "家用电器"
+    },
+    {
+      "code": "603256",
+      "name": "宏和科技",
+      "close": 131.01,
+      "turnover": 1.49,
+      "seal_amount": 75.43,
+      "seal_fund": 9882.08,
+      "industry": "建筑材料"
+    },
+    {
+      "code": "603986",
+      "name": "兆易创新",
+      "close": 344.29,
+      "turnover": 6.34,
+      "seal_amount": 28.32,
+      "seal_fund": 9749.67,
+      "industry": "电子"
+    },
+    {
+      "code": "000818",
+      "name": "航锦科技",
+      "close": 16.85,
+      "turnover": 8.13,
+      "seal_amount": 578.13,
+      "seal_fund": 9741.56,
+      "industry": "基础化工"
+    },
+    {
+      "code": "002210",
+      "name": "飞马国际",
+      "close": 3.28,
+      "turnover": 15.1,
+      "seal_amount": 2952.79,
+      "seal_fund": 9685.15,
+      "industry": "环保"
+    },
+    {
+      "code": "600770",
+      "name": "综艺股份",
+      "close": 8.38,
+      "turnover": 12.51,
+      "seal_amount": 1141.35,
+      "seal_fund": 9564.51,
+      "industry": "综合"
+    },
+    {
+      "code": "002355",
+      "name": "兴民智通",
+      "close": 6.6,
+      "turnover": 8.35,
+      "seal_amount": 1439.83,
+      "seal_fund": 9502.88,
+      "industry": "汽车"
+    },
+    {
+      "code": "002272",
+      "name": "川润股份",
+      "close": 19.03,
+      "turnover": 12.37,
+      "seal_amount": 479.88,
+      "seal_fund": 9132.03,
+      "industry": "机械设备"
+    },
+    {
+      "code": "603936",
+      "name": "博敏电子",
+      "close": 17.05,
+      "turnover": 1.93,
+      "seal_amount": 517.36,
+      "seal_fund": 8821.04,
+      "industry": "电子"
+    },
+    {
+      "code": "002903",
+      "name": "宇环数控",
+      "close": 41.11,
+      "turnover": 4.74,
+      "seal_amount": 195.49,
+      "seal_fund": 8036.48,
+      "industry": "机械设备"
+    },
+    {
+      "code": "002229",
+      "name": "鸿博股份",
+      "close": 18.03,
+      "turnover": 14.72,
+      "seal_amount": 444.32,
+      "seal_fund": 8011.09,
+      "industry": "轻工制造"
+    },
+    {
+      "code": "603045",
+      "name": "福达合金",
+      "close": 51.35,
+      "turnover": 6.97,
+      "seal_amount": 152.84,
+      "seal_fund": 7848.34,
+      "industry": "有色金属"
+    },
+    {
+      "code": "000889",
+      "name": "中嘉博创",
+      "close": 4.86,
+      "turnover": 13.29,
+      "seal_amount": 1583.12,
+      "seal_fund": 7693.94,
+      "industry": "通信"
+    },
+    {
+      "code": "600666",
+      "name": "奥瑞德",
+      "close": 5.76,
+      "turnover": 14.51,
+      "seal_amount": 1329.21,
+      "seal_fund": 7656.27,
+      "industry": "电子"
+    },
+    {
+      "code": "000711",
+      "name": "ST京蓝",
+      "close": 5.17,
+      "turnover": 1.31,
+      "seal_amount": 1478.12,
+      "seal_fund": 7641.86,
+      "industry": "环保"
+    },
+    {
+      "code": "000060",
+      "name": "中金岭南",
+      "close": 7.43,
+      "turnover": 6.09,
+      "seal_amount": 1027.04,
+      "seal_fund": 7630.94,
+      "industry": "有色金属"
+    },
+    {
+      "code": "603316",
+      "name": "诚邦股份",
+      "close": 17.15,
+      "turnover": 9.62,
+      "seal_amount": 408.51,
+      "seal_fund": 7005.9,
+      "industry": "建筑装饰"
+    },
+    {
+      "code": "301308",
+      "name": "江波龙",
+      "close": 481.34,
+      "turnover": 9.6,
+      "seal_amount": 14.5,
+      "seal_fund": 6979.0,
+      "industry": "电子"
+    },
+    {
+      "code": "000553",
+      "name": "安道麦A",
+      "close": 7.5,
+      "turnover": 2.49,
+      "seal_amount": 913.08,
+      "seal_fund": 6848.07,
+      "industry": "基础化工"
+    },
+    {
+      "code": "002787",
+      "name": "华源控股",
+      "close": 21.34,
+      "turnover": 8.21,
+      "seal_amount": 320.44,
+      "seal_fund": 6838.28,
+      "industry": "轻工制造"
+    },
+    {
+      "code": "301511",
+      "name": "德福科技",
+      "close": 90.24,
+      "turnover": 11.8,
+      "seal_amount": 72.41,
+      "seal_fund": 6534.14,
+      "industry": "电力设备"
+    },
+    {
+      "code": "688323",
+      "name": "瑞华泰",
+      "close": 28.79,
+      "turnover": 9.79,
+      "seal_amount": 220.78,
+      "seal_fund": 6356.39,
+      "industry": "基础化工"
+    },
+    {
+      "code": "300042",
+      "name": "朗科科技",
+      "close": 62.72,
+      "turnover": 23.12,
+      "seal_amount": 100.94,
+      "seal_fund": 6331.25,
+      "industry": "计算机"
+    },
+    {
+      "code": "001316",
+      "name": "润贝航科",
+      "close": 57.09,
+      "turnover": 4.25,
+      "seal_amount": 108.02,
+      "seal_fund": 6166.9,
+      "industry": "石油石化"
+    },
+    {
+      "code": "002989",
+      "name": "中天精装",
+      "close": 32.13,
+      "turnover": 5.74,
+      "seal_amount": 186.98,
+      "seal_fund": 6007.54,
+      "industry": "建筑装饰"
+    },
+    {
+      "code": "600130",
+      "name": "波导股份",
+      "close": 5.08,
+      "turnover": 6.02,
+      "seal_amount": 1159.71,
+      "seal_fund": 5891.33,
+      "industry": "电子"
+    },
+    {
+      "code": "600790",
+      "name": "轻纺城",
+      "close": 4.62,
+      "turnover": 4.13,
+      "seal_amount": 1223.12,
+      "seal_fund": 5650.82,
+      "industry": "商贸零售"
+    },
+    {
+      "code": "600589",
+      "name": "大位科技",
+      "close": 11.08,
+      "turnover": 15.86,
+      "seal_amount": 508.75,
+      "seal_fund": 5636.99,
+      "industry": "计算机"
+    },
+    {
+      "code": "300166",
+      "name": "东方国信",
+      "close": 18.53,
+      "turnover": 30.75,
+      "seal_amount": 299.93,
+      "seal_fund": 5557.7,
+      "industry": "计算机"
+    },
+    {
+      "code": "002158",
+      "name": "汉钟精机",
+      "close": 30.37,
+      "turnover": 5.41,
+      "seal_amount": 176.96,
+      "seal_fund": 5374.28,
+      "industry": "机械设备"
+    },
+    {
+      "code": "002640",
+      "name": "跨境通",
+      "close": 4.02,
+      "turnover": 11.46,
+      "seal_amount": 1319.54,
+      "seal_fund": 5304.55,
+      "industry": "商贸零售"
+    },
+    {
+      "code": "603418",
+      "name": "友升股份",
+      "close": 56.82,
+      "turnover": 15.26,
+      "seal_amount": 86.82,
+      "seal_fund": 4933.05,
+      "industry": "汽车"
+    },
+    {
+      "code": "300368",
+      "name": "汇金股份",
+      "close": 12.24,
+      "turnover": 14.3,
+      "seal_amount": 402.82,
+      "seal_fund": 4930.52,
+      "industry": "计算机"
+    },
+    {
+      "code": "002453",
+      "name": "华软科技",
+      "close": 6.17,
+      "turnover": 11.82,
+      "seal_amount": 771.98,
+      "seal_fund": 4763.09,
+      "industry": "基础化工"
+    },
+    {
+      "code": "600381",
+      "name": "*ST春天",
+      "close": 3.77,
+      "turnover": 0.34,
+      "seal_amount": 1226.18,
+      "seal_fund": 4622.68,
+      "industry": "食品饮料"
+    },
+    {
+      "code": "603985",
+      "name": "恒润股份",
+      "close": 28.73,
+      "turnover": 13.44,
+      "seal_amount": 159.93,
+      "seal_fund": 4594.69,
+      "industry": "电力设备"
+    },
+    {
+      "code": "600719",
+      "name": "大连热电",
+      "close": 8.53,
+      "turnover": 10.38,
+      "seal_amount": 505.48,
+      "seal_fund": 4311.74,
+      "industry": "公用事业"
+    },
+    {
+      "code": "600821",
+      "name": "金开新能",
+      "close": 8.58,
+      "turnover": 14.42,
+      "seal_amount": 488.31,
+      "seal_fund": 4189.7,
+      "industry": "公用事业"
+    },
+    {
+      "code": "002428",
+      "name": "云南锗业",
+      "close": 77.01,
+      "turnover": 18.47,
+      "seal_amount": 53.77,
+      "seal_fund": 4140.8,
+      "industry": "有色金属"
+    },
+    {
+      "code": "000863",
+      "name": "三湘印象",
+      "close": 5.34,
+      "turnover": 4.21,
+      "seal_amount": 758.69,
+      "seal_fund": 4051.4,
+      "industry": "房地产"
+    },
+    {
+      "code": "603248",
+      "name": "锡华科技",
+      "close": 28.17,
+      "turnover": 18.51,
+      "seal_amount": 135.94,
+      "seal_fund": 3829.43,
+      "industry": "电力设备"
+    },
+    {
+      "code": "603156",
+      "name": "养元饮品",
+      "close": 41.31,
+      "turnover": 1.16,
+      "seal_amount": 92.28,
+      "seal_fund": 3812.23,
+      "industry": "食品饮料"
+    },
+    {
+      "code": "603777",
+      "name": "来伊份",
+      "close": 18.07,
+      "turnover": 4.92,
+      "seal_amount": 210.3,
+      "seal_fund": 3800.08,
+      "industry": "食品饮料"
+    },
+    {
+      "code": "002289",
+      "name": "*ST宇顺",
+      "close": 38.39,
+      "turnover": 0.09,
+      "seal_amount": 95.06,
+      "seal_fund": 3649.35,
+      "industry": "电子"
+    },
+    {
+      "code": "603629",
+      "name": "利通电子",
+      "close": 158.85,
+      "turnover": 12.95,
+      "seal_amount": 22.91,
+      "seal_fund": 3639.25,
+      "industry": "电子"
+    },
+    {
+      "code": "603978",
+      "name": "深圳新星",
+      "close": 29.63,
+      "turnover": 8.68,
+      "seal_amount": 122.47,
+      "seal_fund": 3628.71,
+      "industry": "有色金属"
+    },
+    {
+      "code": "603001",
+      "name": "奥康国际",
+      "close": 9.05,
+      "turnover": 4.21,
+      "seal_amount": 397.55,
+      "seal_fund": 3597.83,
+      "industry": "纺织服饰"
+    },
+    {
+      "code": "000402",
+      "name": "金融街",
+      "close": 3.49,
+      "turnover": 7.22,
+      "seal_amount": 1030.88,
+      "seal_fund": 3597.77,
+      "industry": "房地产"
+    },
+    {
+      "code": "300652",
+      "name": "雷迪克",
+      "close": 47.32,
+      "turnover": 10.33,
+      "seal_amount": 75.58,
+      "seal_fund": 3576.3,
+      "industry": "汽车"
+    },
+    {
+      "code": "600527",
+      "name": "江南高纤",
+      "close": 3.25,
+      "turnover": 7.31,
+      "seal_amount": 1099.83,
+      "seal_fund": 3574.45,
+      "industry": "纺织服饰"
+    },
+    {
+      "code": "603398",
+      "name": "*ST沐邦",
+      "close": 13.07,
+      "turnover": 0.37,
+      "seal_amount": 272.57,
+      "seal_fund": 3562.52,
+      "industry": "电力设备"
+    },
+    {
+      "code": "603278",
+      "name": "大业股份",
+      "close": 12.32,
+      "turnover": 5.48,
+      "seal_amount": 283.29,
+      "seal_fund": 3490.16,
+      "industry": "机械设备"
+    },
+    {
+      "code": "002856",
+      "name": "*ST美芝",
+      "close": 14.47,
+      "turnover": 7.92,
+      "seal_amount": 218.08,
+      "seal_fund": 3155.57,
+      "industry": "建筑装饰"
+    },
+    {
+      "code": "603063",
+      "name": "禾望电气",
+      "close": 48.27,
+      "turnover": 8.71,
+      "seal_amount": 65.37,
+      "seal_fund": 3155.53,
+      "industry": "电力设备"
+    },
+    {
+      "code": "603937",
+      "name": "丽岛新材",
+      "close": 16.78,
+      "turnover": 4.97,
+      "seal_amount": 185.61,
+      "seal_fund": 3114.54,
+      "industry": "有色金属"
+    },
+    {
+      "code": "603269",
+      "name": "海鸥股份",
+      "close": 16.41,
+      "turnover": 6.64,
+      "seal_amount": 182.62,
+      "seal_fund": 2996.81,
+      "industry": "机械设备"
+    },
+    {
+      "code": "000609",
+      "name": "*ST中迪",
+      "close": 15.14,
+      "turnover": 22.15,
+      "seal_amount": 194.54,
+      "seal_fund": 2945.31,
+      "industry": "房地产"
+    },
+    {
+      "code": "003007",
+      "name": "直真科技",
+      "close": 49.19,
+      "turnover": 13.94,
+      "seal_amount": 58.39,
+      "seal_fund": 2872.2,
+      "industry": "计算机"
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "close": 55.58,
+      "turnover": 7.26,
+      "seal_amount": 51.09,
+      "seal_fund": 2839.58,
+      "industry": "有色金属"
+    },
+    {
+      "code": "002245",
+      "name": "蔚蓝锂芯",
+      "close": 22.73,
+      "turnover": 10.65,
+      "seal_amount": 111.89,
+      "seal_fund": 2543.26,
+      "industry": "电力设备"
+    },
+    {
+      "code": "002634",
+      "name": "*ST棒杰",
+      "close": 5.58,
+      "turnover": 2.22,
+      "seal_amount": 450.4,
+      "seal_fund": 2513.24,
+      "industry": "纺织服饰"
+    },
+    {
+      "code": "603843",
+      "name": "*ST正平",
+      "close": 9.42,
+      "turnover": 3.04,
+      "seal_amount": 251.68,
+      "seal_fund": 2370.86,
+      "industry": "建筑装饰"
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "close": 16.36,
+      "turnover": 6.72,
+      "seal_amount": 137.59,
+      "seal_fund": 2250.99,
+      "industry": "交通运输"
+    },
+    {
+      "code": "688813",
+      "name": "泰金新能",
+      "close": 110.88,
+      "turnover": 20.05,
+      "seal_amount": 19.24,
+      "seal_fund": 2133.34,
+      "industry": "机械设备"
+    },
+    {
+      "code": "603158",
+      "name": "腾龙股份",
+      "close": 14.04,
+      "turnover": 8.58,
+      "seal_amount": 149.4,
+      "seal_fund": 2097.51,
+      "industry": "汽车"
+    },
+    {
+      "code": "600107",
+      "name": "*ST尔雅",
+      "close": 6.31,
+      "turnover": 3.04,
+      "seal_amount": 308.77,
+      "seal_fund": 1948.34,
+      "industry": "纺织服饰"
+    },
+    {
+      "code": "605060",
+      "name": "联德股份",
+      "close": 64.39,
+      "turnover": 6.37,
+      "seal_amount": 24.89,
+      "seal_fund": 1602.67,
+      "industry": "机械设备"
+    },
+    {
+      "code": "002805",
+      "name": "丰元股份",
+      "close": 25.14,
+      "turnover": 24.87,
+      "seal_amount": 51.89,
+      "seal_fund": 1304.62,
+      "industry": "电力设备"
+    },
+    {
+      "code": "603559",
+      "name": "ST通脉",
+      "close": 8.02,
+      "turnover": 1.11,
+      "seal_amount": 158.78,
+      "seal_fund": 1273.44,
+      "industry": "通信"
+    },
+    {
+      "code": "002203",
+      "name": "海亮股份",
+      "close": 19.79,
+      "turnover": 4.2,
+      "seal_amount": 61.49,
+      "seal_fund": 1216.89,
+      "industry": "有色金属"
+    },
+    {
+      "code": "688584",
+      "name": "上海合晶",
+      "close": 24.85,
+      "turnover": 9.74,
+      "seal_amount": 44.66,
+      "seal_fund": 1109.81,
+      "industry": "电子"
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "close": 179.58,
+      "turnover": 7.24,
+      "seal_amount": 6.15,
+      "seal_fund": 1104.42,
+      "industry": "电子"
+    },
+    {
+      "code": "603389",
+      "name": "*ST亚振",
+      "close": 64.91,
+      "turnover": 0.43,
+      "seal_amount": 16.29,
+      "seal_fund": 1057.38,
+      "industry": "轻工制造"
+    },
+    {
+      "code": "600082",
+      "name": "ST海泰",
+      "close": 3.51,
+      "turnover": 1.33,
+      "seal_amount": 274.28,
+      "seal_fund": 962.72,
+      "industry": "房地产"
+    },
+    {
+      "code": "920181",
+      "name": "赛英电子",
+      "close": 109.35,
+      "turnover": 47.6,
+      "seal_amount": 8.56,
+      "seal_fund": 936.17,
+      "industry": "电子"
+    },
+    {
+      "code": "003004",
+      "name": "*ST声迅",
+      "close": 34.76,
+      "turnover": 1.46,
+      "seal_amount": 26.65,
+      "seal_fund": 926.31,
+      "industry": "计算机"
+    },
+    {
+      "code": "600892",
+      "name": "*ST大晟",
+      "close": 3.83,
+      "turnover": 1.79,
+      "seal_amount": 205.36,
+      "seal_fund": 786.53,
+      "industry": "传媒"
+    },
+    {
+      "code": "002283",
+      "name": "天润工业",
+      "close": 12.35,
+      "turnover": 5.95,
+      "seal_amount": 62.54,
+      "seal_fund": 772.37,
+      "industry": "汽车"
+    },
+    {
+      "code": "002207",
+      "name": "*ST准油",
+      "close": 7.21,
+      "turnover": 17.57,
+      "seal_amount": 101.52,
+      "seal_fund": 731.96,
+      "industry": "石油石化"
+    },
+    {
+      "code": "603828",
+      "name": "*ST利达",
+      "close": 5.03,
+      "turnover": 1.82,
+      "seal_amount": 138.78,
+      "seal_fund": 698.05,
+      "industry": "建筑装饰"
+    },
+    {
+      "code": "002181",
+      "name": "粤传媒",
+      "close": 18.14,
+      "turnover": 14.09,
+      "seal_amount": 32.15,
+      "seal_fund": 583.2,
+      "industry": "传媒"
+    },
+    {
+      "code": "603557",
+      "name": "*ST起步",
+      "close": 4.47,
+      "turnover": 3.28,
+      "seal_amount": 130.12,
+      "seal_fund": 581.65,
+      "industry": "纺织服饰"
+    },
+    {
+      "code": "600753",
+      "name": "*ST海钦",
+      "close": 13.69,
+      "turnover": 2.68,
+      "seal_amount": 37.98,
+      "seal_fund": 519.92,
+      "industry": "交通运输"
+    },
+    {
+      "code": "603580",
+      "name": "*ST艾艾",
+      "close": 22.27,
+      "turnover": 3.13,
+      "seal_amount": 19.96,
+      "seal_fund": 444.51,
+      "industry": "基础化工"
+    },
+    {
+      "code": "002199",
+      "name": "*ST东晶",
+      "close": 11.09,
+      "turnover": 5.35,
+      "seal_amount": 36.3,
+      "seal_fund": 402.57,
+      "industry": "电子"
+    },
+    {
+      "code": "002871",
+      "name": "伟隆股份",
+      "close": 20.28,
+      "turnover": 6.46,
+      "seal_amount": 19.44,
+      "seal_fund": 394.24,
+      "industry": "机械设备"
+    },
+    {
+      "code": "603789",
+      "name": "*ST星农",
+      "close": 5.95,
+      "turnover": 2.15,
+      "seal_amount": 51.58,
+      "seal_fund": 306.9,
+      "industry": "机械设备"
+    },
+    {
+      "code": "002052",
+      "name": "同洲电子",
+      "close": 11.1,
+      "turnover": 8.48,
+      "seal_amount": 26.9,
+      "seal_fund": 298.59,
+      "industry": "家用电器"
+    },
+    {
+      "code": "003041",
+      "name": "真爱美家",
+      "close": 57.64,
+      "turnover": 5.43,
+      "seal_amount": 4.54,
+      "seal_fund": 261.69,
+      "industry": "纺织服饰"
+    },
+    {
+      "code": "603115",
+      "name": "海星股份",
+      "close": 62.58,
+      "turnover": 4.56,
+      "seal_amount": 4.18,
+      "seal_fund": 261.58,
+      "industry": "有色金属"
+    },
+    {
+      "code": "002080",
+      "name": "中材科技",
+      "close": 60.69,
+      "turnover": 2.71,
+      "seal_amount": 3.04,
+      "seal_fund": 184.25,
+      "industry": "建筑材料"
+    },
+    {
+      "code": "603353",
+      "name": "和顺石油",
+      "close": 47.4,
+      "turnover": 9.48,
+      "seal_amount": 3.16,
+      "seal_fund": 149.78,
+      "industry": "石油石化"
+    },
+    {
+      "code": "688800",
+      "name": "瑞可达",
+      "close": 126.0,
+      "turnover": 12.54,
+      "seal_amount": 1.05,
+      "seal_fund": 131.83,
+      "industry": "电子"
+    },
+    {
+      "code": "000802",
+      "name": "北京文化",
+      "close": 4.74,
+      "turnover": 13.06,
+      "seal_amount": 22.34,
+      "seal_fund": 105.89,
+      "industry": "传媒"
+    },
+    {
+      "code": "603272",
+      "name": "*ST联翔",
+      "close": 28.14,
+      "turnover": 15.98,
+      "seal_amount": 1.3,
+      "seal_fund": 36.58,
+      "industry": "轻工制造"
+    },
+    {
+      "code": "000668",
+      "name": "*ST荣控",
+      "close": 16.64,
+      "turnover": 2.5,
+      "seal_amount": 1.3,
+      "seal_fund": 21.55,
+      "industry": "房地产"
+    },
+    {
+      "code": "000967",
+      "name": "盈峰环境",
+      "close": 14.93,
+      "turnover": 9.04,
+      "seal_amount": 0,
+      "seal_fund": 0,
+      "industry": "环保"
+    }
+  ]
+}

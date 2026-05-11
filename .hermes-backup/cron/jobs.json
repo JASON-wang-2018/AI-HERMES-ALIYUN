@@ -2,7 +2,7 @@
   "jobs": [
     {
       "id": "e8fd14112d3f",
-      "name": "\u6bcf\u65e518\u70b9\u80a1\u5e02\u884c\u60c5\u62a5\u544a",
+      "name": "\ud83d\udccb \u80a1\u5e02\u7efc\u5408\u62a5\u544a\uff08\u56db\u5408\u4e00\uff0919:00",
       "prompt": "## \u4efb\u52a1\uff1a\u6bcf\u592918:00 \u80a1\u5e02\u7efc\u5408\u62a5\u544a\uff08\u56db\u5408\u4e00\uff09\n\n### \u6570\u636e\u6765\u6e90\n1. **\u6570\u636e\u770b\u76d8**\uff1a17:50\u5165\u5e93\uff08DB\u67e5\uff09\n2. **\u8d22\u8054\u793e\u6536\u8bc4**\uff1a17:15\u5165\u5e93\uff08DB\u67e5\uff09\n3. **\u8d22\u8054\u793e\u7126\u70b9\u590d\u76d8**\uff1a17:45\u5165\u5e93\uff08DB\u67e5\uff09\n4. **\u4e1c\u8d22\u677f\u5757\u8d44\u91d1\u6d41**\uff1a17:30\u5165\u5e93\uff08DB\u67e5\uff09\n5. **\u540c\u82b1\u987a\u590d\u76d8**\uff1ahttps://stock.10jqka.com.cn/fupan/\uff08curl + iconv -f GBK -t UTF-8\uff09\n\n### \u26a0\ufe0f \u5468\u56db\u7279\u522b\u98ce\u63a7\u6a21\u5757\uff08\u81ea\u52a8\u89e6\u53d1\uff09\n**\u5982\u679c\u4eca\u5929\u662f\u5468\u56db\uff08weekday=4\uff09**\uff0c\u5728\u62a5\u544a\u672b\u5c3e\u5fc5\u987b\u5305\u542b\u4ee5\u4e0b\u5185\u5bb9\uff0c\u4e0d\u5f97\u7701\u7565\uff1a\n\n---\n\u26a0\ufe0f \u3010\u7eb3\u798f\u6536\u76d8\u98ce\u9669\u63d0\u793a | \u5468\u56db\u3011\n\u4eca\u65e5\u5468\u56db\uff0c\u672c\u5468\u4ea4\u6613\u65e5\u5df2\u8fd1\u5c3e\u58f0\uff0c\u6ce8\u610f\u4ee5\u4e0b\u98ce\u9669\uff1a\n1. \ud83d\udd34 \u4e3b\u529b\u5e38\u5728\u5468\u56db\u5468\u4e94\u53d1\u529b/\u51fa\u8d27\u2014\u2014\u4eca\u65e5\u6301\u4ed3\u4e2a\u80a1\u662f\u5426\u6709\u5f02\u5e38\u653e\u91cf\u7838\u76d8\uff1f\u4e3b\u529b\u8d44\u91d1\u51c0\u6d41\u51fa\u65b9\u5411\uff1f\n2. \ud83d\udd34 \u660e\u65e5\u5468\u4e94\uff0c\u5468\u672b5\u5929\u4f11\u5e02\u6d88\u606f\u9762\u4e0d\u786e\u5b9a\u6027\u6781\u5927\u2014\u2014\u6536\u76d8\u524d\u52a1\u5fc5\u51cf\u4ed3/\u7a7a\u4ed3\n3. \ud83d\udd34 \u4e25\u683c\u8bbe\u597d\u660e\u65e5\u6b62\u635f\u7ebf\uff1b\u65e0\u5341\u8db3\u628a\u63e1\u4e0d\u5f00\u65b0\u4ed3\n4. \ud83d\udfe1 \u878d\u8d44\u4f59\u989d\u53d8\u5316\u3001\u5317\u5411\u8d44\u91d1\u4eca\u65e5\u6d41\u5411\u91cd\u70b9\u5173\u6ce8\n5. \ud83d\udfe1 \u4eca\u65e5\u5f3a\u52bf\u677f\u5757\u662f\u5426\u51fa\u73b0\u9f99\u5934\u80a1\u70b8\u677f\uff1f\u8b66\u60d5\u60c5\u7eea\u9000\u6f6e\u4fe1\u53f7\n---\n\n### \u6267\u884c\u6b65\u9aa4\n\n**\u7b2c\u4e00\u6b65\uff1a\u4eceSQLite\u8bfb\u53d6\u4eca\u65e5\u5165\u5e93\u6570\u636e**\n\u8def\u5f84\uff1a~/stock_knowledge/database/market_data.db\n```sql\n-- \u5348\u8bc4\nSELECT title, content, key_points FROM daily_review WHERE trade_date = date('now', 'localtime') AND review_type = '\u5348\u8bc4';\n\n-- \u6536\u8bc4\nSELECT title, content, key_points FROM daily_review WHERE trade_date = date('now', 'localtime') AND review_type = '\u6536\u8bc4';\n\n-- \u7126\u70b9\u590d\u76d8\nSELECT title, content, key_points FROM daily_review WHERE trade_date = date('now', 'localtime') AND review_type = '\u7126\u70b9\u590d\u76d8';\n\n-- \u677f\u5757\u8d44\u91d1\u6d41\uff08\u51c0\u6d41\u5165\u524d10+\u51c0\u6d41\u51fa\u524d10\uff09\nSELECT sector_name, main_net, main_net_pct, price_chg FROM sector_moneyflow WHERE trade_date = date('now', 'localtime') ORDER BY main_net DESC LIMIT 10;\nSELECT sector_name, main_net, main_net_pct, price_chg FROM sector_moneyflow WHERE trade_date = date('now', 'localtime') ORDER BY main_net ASC LIMIT 10;\n\n-- \u6570\u636e\u770b\u76d8\nSELECT content FROM data_kanpan WHERE crawl_date = date('now', 'localtime');\n```\n\n**\u7b2c\u4e8c\u6b65\uff1a\u91c7\u96c6\u540c\u82b1\u987a\u590d\u76d8**\n```bash\ncurl -s \"https://stock.10jqka.com.cn/fupan/\" -H \"User-Agent: Mozilla/5.0\" | iconv -f GBK -t UTF-8\n```\n\n**\u7b2c\u4e09\u6b65\uff1a\u5224\u65ad\u65e5\u671f\u7c7b\u578b**\n```python\nfrom datetime import datetime\nweekday = datetime.now().weekday()  # 0=\u5468\u4e00 4=\u5468\u56db 5=\u5468\u516d\nis_thursday = (weekday == 4)\nis_friday = (weekday == 5)\nis_holiday_eve = False  # \u53ef\u6839\u636e\u957f\u5047\u524d\u5224\u65ad\n```\n\n### \u8f93\u51fa\u683c\u5f0f\n```\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  \ud83d\udcca {\u65e5\u671f} {\u661f\u671f\u51e0} \u6536\u76d8\u7efc\u5408\u62a5\u544a\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\n\u3010\u5348\u8bc4\u56de\u987e\u3011\n  \ud83d\udcf0 {\u6807\u9898}\n  {\u7cbe\u70bc\u8981\u70b9}\n\n\u3010\u540c\u82b1\u987a\u590d\u76d8\u8981\u70b9\u3011\n  {\u5185\u5bb9}\n\n\u3010\u6570\u636e\u770b\u76d8\u8981\u70b9\u3011\n  {\u5185\u5bb9}\n\n\u3010\u6536\u5e02\u70b9\u8bc4\u3011\n  \ud83d\udcf0 {\u6807\u9898}\n  {5\u7ef4\u7ed3\u6784\u5316\u8981\u70b9}\n\n\u3010\u7126\u70b9\u590d\u76d8\u3011\n  \ud83d\udcf0 {\u6807\u9898}\n  {\u5185\u5bb9}\n\n\u3010\u4e3b\u529b\u8d44\u91d1\u6d41 Top10\uff08\u51c0\u6d41\u5165\uff09\u3011\n  \u677f\u5757      \u51c0\u989d(\u4e07\u5143)    \u51c0\u5360\u6bd4    \u6da8\u8dcc\u5e45\n\n\u3010\u4e3b\u529b\u8d44\u91d1\u6d41 Top10\uff08\u51c0\u6d41\u51fa\uff09\u3011\n  \u677f\u5757      \u51c0\u989d(\u4e07\u5143)    \u51c0\u5360\u6bd4    \u6da8\u8dcc\u5e45\n\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n  \ud83d\udd25/\ud83d\udcc8/\u2696/\ud83d\udcc9/\u26a0\ufe0f \u5e02\u573a\u60c5\u7eea\uff1a{\u63cf\u8ff0}\n  \u2705 \u673a\u4f1a\uff1a{\u677f\u5757\u540d} \u5f3a\u52bf\u9886\u6da8+{x}%\n  \u26a0\ufe0f \u98ce\u9669\uff1a{\u63cf\u8ff0}\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\n\u26a0\ufe0f \u3010\u5468\u56db\u98ce\u9669\u63d0\u793a\u3011 \u2190 \u4ec5\u5468\u56db\u89e6\u53d1\n[\u89c1\u4e0a\u65b9\u6a21\u5757\u5185\u5bb9]\n\n\u26a0\ufe0f \u3010\u8282\u524d\u98ce\u9669\u63d0\u793a\u3011 \u2190 \u4ec5\u8282\u524d\u6700\u540e\u4ea4\u6613\u65e5\u89e6\u53d1\n\u4eca\u65e5\u662f{\u8282\u5047\u65e5}\u524d\u6700\u540e\u4ea4\u6613\u65e5\uff0c\u5efa\u8bae\u8f7b\u4ed3/\u7a7a\u4ed3\uff0c\u89c4\u907f\u5047\u671f\u6d88\u606f\u9762\u4e0d\u786e\u5b9a\u6027\u3002\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n```\n\n### \u6ce8\u610f\n- weekday\u5224\u65ad\uff1a0=\u5468\u4e00\uff0c1=\u5468\u4e8c\uff0c2=\u5468\u4e09\uff0c3=\u5468\u56db\uff0c4=\u5468\u4e94\uff08python weekday()\uff09\n- \u5982\u679c\u662f\u5468\u4e94(weekday=4)\u6216\u957f\u5047\u524d\u6700\u540e\u4e00\u4e2a\u4ea4\u6613\u65e5\uff0c\u52a0\uff1a\u300c\u8282\u524d\u6700\u540e\u4e00\u4e2a\u4ea4\u6613\u65e5\uff0c\u5efa\u8bae\u8f7b\u4ed3/\u7a7a\u4ed3\u300d\n- \u8f93\u51fa\u5185\u5bb9\u5fc5\u987b\u662f\u4e2d\u6587",
       "skills": [],
       "skill": null,
@@ -13,21 +13,21 @@
       "context_from": null,
       "schedule": {
         "kind": "cron",
-        "expr": "0 18 * * 1-5",
-        "display": "0 18 * * 1-5"
+        "expr": "0 19 * * 1-5",
+        "display": "0 19 * * 1-5"
       },
-      "schedule_display": "0 18 * * 1-5",
+      "schedule_display": "0 19 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 5
+        "completed": 11
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T15:51:44.695859+08:00",
-      "next_run_at": "2026-05-05T18:00:00+08:00",
-      "last_run_at": "2026-05-04T18:03:42.442244+08:00",
+      "next_run_at": "2026-05-12T19:00:00+08:00",
+      "last_run_at": "2026-05-11T19:04:40.558774+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -60,15 +60,15 @@
       "schedule_display": "45 12 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 4
+        "completed": 9
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T15:59:00.234487+08:00",
-      "next_run_at": "2026-05-05T12:45:00+08:00",
-      "last_run_at": "2026-05-04T12:45:57.543721+08:00",
+      "next_run_at": "2026-05-12T12:45:00+08:00",
+      "last_run_at": "2026-05-11T12:45:25.663745+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -84,7 +84,7 @@
     },
     {
       "id": "5d0571f1738d",
-      "name": "\u8d22\u8054\u793e\u6536\u8bc4\u91c7\u96c6",
+      "name": "\ud83d\udce1 \u8d22\u8054\u793e\u6536\u8bc4\u91c7\u96c6 17:15",
       "prompt": "## \u4efb\u52a1\uff1a\u91c7\u96c6\u8d22\u8054\u793e\u6bcf\u65e5\u6536\u8bc4\uff0c\u5165\u5e93SQLite\uff0c\u5e76\u8f93\u51fa\u6458\u8981\u6d88\u606f\n\n### \u6267\u884c\u6b65\u9aa4\n\n**\u7b2c\u4e00\u6b65\uff1a\u8fd0\u884c\u91c7\u96c6\u5165\u5e93\u811a\u672c**\n```bash\ncd ~/stock_knowledge && source venv/bin/activate\npython3 ~/stock_knowledge/scripts/daily_review_merger.py \u6536\u8bc4\n```\n\u811a\u672c\u4f1a\u81ea\u52a8\uff1a\n- \u6293\u53d6 https://www.cls.cn/subject/1139 \u6700\u65b0\u6536\u8bc4\u6587\u7ae0\n- \u5224\u65ad\u662f\u5426\u4eca\u65e5\u53d1\u5e03\uff08\u975e\u4eca\u65e5\u5219\u8df3\u8fc7\uff09\n- \u89e3\u6790\u6807\u9898+\u6b63\u6587+\u63d0\u70bc\u8981\u70b9\n- \u4fdd\u5b58\u5230 SQLite\uff08~/stock_knowledge/database/daily_market.db \u7684 daily_review \u8868\uff09\n- \u8f93\u51fa\u6458\u8981\u683c\u5f0f\u62a5\u544a\n\n**\u7b2c\u4e8c\u6b65\uff1a\u68c0\u67e5\u5165\u5e93\u7ed3\u679c**\n\u811a\u672c\u8f93\u51fa\u5373\u5165\u5e93\u7ed3\u679c\u3002\u5982\u679c\u663e\u793a\"[SKIP] \u6536\u8bc4\u975e\u4eca\u65e5\"\uff0c\u8bf4\u660e\u4eca\u65e5\u6536\u8bc4\u5c1a\u672a\u53d1\u5e03\uff08\u901a\u5e3817:15\u4e4b\u540e\u624d\u6709\uff09\uff0c\u7a0d\u540e\u518d\u8bd5\u3002\n\n**\u7b2c\u4e09\u6b65\uff1a\u76f4\u63a5\u5c55\u793a**\n\u811a\u672c\u7684\u6807\u51c6\u8f93\u51fa\u5c31\u662f\u7ed9\u7528\u6237\u7684\u6536\u8bc4\u6458\u8981\uff0c\u76f4\u63a5\u5c55\u793a\u5373\u53ef\u3002",
       "skills": [],
       "skill": null,
@@ -101,15 +101,15 @@
       "schedule_display": "15 17 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 5
+        "completed": 10
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T15:59:09.408370+08:00",
-      "next_run_at": "2026-05-05T17:15:00+08:00",
-      "last_run_at": "2026-05-04T17:16:13.421570+08:00",
+      "next_run_at": "2026-05-12T17:15:00+08:00",
+      "last_run_at": "2026-05-11T17:15:53.444900+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -125,7 +125,7 @@
     },
     {
       "id": "df20eb18066d",
-      "name": "\u8d22\u8054\u793e\u7126\u70b9\u590d\u76d8\u91c7\u96c6",
+      "name": "\ud83d\udccb \u8d22\u8054\u793e\u7126\u70b9\u590d\u76d8\u91c7\u96c6 17:55",
       "prompt": "## \u4efb\u52a1\uff1a\u91c7\u96c6\u8d22\u8054\u793e\u7126\u70b9\u590d\u76d8\uff0c\u5165\u5e93SQLite\uff0c\u8f93\u51fa\u6458\u8981\n\n### \u6267\u884c\u6b65\u9aa4\n\n**\u7b2c\u4e00\u6b65\uff1a\u8fd0\u884c\u91c7\u96c6\u5165\u5e93\u811a\u672c**\n```bash\ncd ~/stock_knowledge && source venv/bin/activate && python3 scripts/daily_review_merger.py \u7126\u70b9\u590d\u76d8 2>&1\n```\n\n**\u7b2c\u4e8c\u6b65\uff1a\u9a8c\u8bc1\u5165\u5e93\u7ed3\u679c**\n```bash\ncd ~/stock_knowledge && source venv/bin/activate && python3 -c \"\nimport sqlite3, json\nconn = sqlite3.connect('database/daily_market.db')\nc = conn.cursor()\nc.execute('SELECT review_type, title, key_points FROM daily_review WHERE review_type=\\\"\u7126\u70b9\u590d\u76d8\\\" ORDER BY trade_date DESC LIMIT 1')\nrow = c.fetchone()\nif row:\n    print(f'\u7c7b\u578b: {row[0]}')\n    print(f'\u6807\u9898: {row[1]}')\n    kp = json.loads(row[2]) if row[2] else {}\n    for k, v in kp.items():\n        if v: print(f'{k}: {v[:100]}...' if len(v) > 100 else f'{k}: {v}')\nconn.close()\n\"\n```\n\n**\u7b2c\u4e09\u6b65\uff1a\u5982\u679c\u63d0\u53d6\u5230\u6709\u6548\u5185\u5bb9\uff08key_points\u975e\u7a7a\uff09\uff0c\u8f93\u51fa\u6458\u8981**\n- \u7126\u70b9\u590d\u76d8\u5305\u542b\u5f53\u65e5\u6700\u5f3a\u4e3b\u7ebf\u3001\u8fde\u677f\u664b\u7ea7\u7387\u3001\u677f\u5757\u9ad8\u6f6e/\u5206\u6b67\u8282\u70b9\u3001\u8282\u524d\u8d44\u91d1\u884c\u4e3a\n- \u5982\u679c key_points \u5168\u90e8\u4e3a\u7a7a\uff0c\u8f93\u51fa \"\u26a0\ufe0f \u7126\u70b9\u590d\u76d8\u63d0\u53d6\u5931\u8d25\uff0c\u4ec5\u91c7\u96c6\u5230\u6807\u9898\"\n\n\u8f93\u51fa\u5b8c\u6210\u540e\u7ed3\u675f\uff0c\u4e0d\u8981\u591a\u4f59\u64cd\u4f5c\u3002",
       "skills": [],
       "skill": null,
@@ -136,21 +136,21 @@
       "context_from": null,
       "schedule": {
         "kind": "cron",
-        "expr": "45 17 * * 1-5",
-        "display": "45 17 * * 1-5"
+        "expr": "55 17 * * 1-5",
+        "display": "55 17 * * 1-5"
       },
-      "schedule_display": "45 17 * * 1-5",
+      "schedule_display": "55 17 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 4
+        "completed": 9
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T21:29:50.145530+08:00",
-      "next_run_at": "2026-05-05T17:45:00+08:00",
-      "last_run_at": "2026-05-04T17:46:19.178662+08:00",
+      "next_run_at": "2026-05-12T17:55:00+08:00",
+      "last_run_at": "2026-05-11T17:56:14.843947+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -166,7 +166,7 @@
     },
     {
       "id": "37a4a2e6757c",
-      "name": "\u4e1c\u8d22\u677f\u5757\u8d44\u91d1\u6d41\u91c7\u96c6",
+      "name": "\ud83d\udcb0 \u4e1c\u8d22\u677f\u5757\u8d44\u91d1\u6d41\u91c7\u96c6 17:35",
       "prompt": "## \u4efb\u52a1\uff1a\u91c7\u96c6\u4e1c\u8d22\u677f\u5757\u4e3b\u529b\u8d44\u91d1\u6d41\u6570\u636e\uff0c\u5165\u5e93SQLite\u5e76\u8f93\u51fa\u6458\u8981\n\n### \u6267\u884c\u6b65\u9aa4\n\n**\u7b2c\u4e00\u6b65\uff1a\u8fd0\u884c\u677f\u5757\u8d44\u91d1\u6d41\u91c7\u96c6\u811a\u672c**\n```bash\ncd ~/stock_knowledge && source venv/bin/activate && python3 scripts/sector_money_flow.py 2>&1\n```\n\n**\u7b2c\u4e8c\u6b65\uff1a\u786e\u8ba4\u5165\u5e93\u6570\u91cf**\n```bash\ncd ~/stock_knowledge && source venv/bin/activate && python3 -c \"\nimport sqlite3\nconn = sqlite3.connect('database/daily_market.db')\nc = conn.cursor()\nc.execute('SELECT COUNT(*) FROM sector_moneyflow WHERE trade_date=date(\\\"now\\\",\\\"localtime\\\")')\nprint('\u5165\u5e93\u6761\u6570:', c.fetchone()[0])\nconn.close()\n\"\n```\n\n### \u6ce8\u610f\u4e8b\u9879\n- 17:30 \u5904\u4e8e\u6536\u76d8\u540e\uff0c\u6b64\u65f6\u677f\u5757\u8d44\u91d1\u6d41\u6570\u636e\u6700\u4e3a\u5b8c\u6574\n- \u5982\u679c\u5468\u672b\u6216\u8282\u5047\u65e5\u8df3\u8fc7\n- \u4ec5\u505a\u6570\u636e\u91c7\u96c6\u5165\u5e93\uff0c\u4e0d\u8981\u91cd\u590d\u91c7\u96c6\u540c\u4e00\u5929",
       "skills": [],
       "skill": null,
@@ -177,21 +177,21 @@
       "context_from": null,
       "schedule": {
         "kind": "cron",
-        "expr": "30 17 * * 1-5",
-        "display": "30 17 * * 1-5"
+        "expr": "35 17 * * 1-5",
+        "display": "35 17 * * 1-5"
       },
-      "schedule_display": "30 17 * * 1-5",
+      "schedule_display": "35 17 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 4
+        "completed": 9
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T21:45:21.603577+08:00",
-      "next_run_at": "2026-05-05T17:30:00+08:00",
-      "last_run_at": "2026-05-04T17:30:44.025492+08:00",
+      "next_run_at": "2026-05-12T17:35:00+08:00",
+      "last_run_at": "2026-05-11T17:36:18.243000+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -224,15 +224,15 @@
       "schedule_display": "0 21 * * 1-5",
       "repeat": {
         "times": 999,
-        "completed": 4
+        "completed": 9
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T22:12:22.453198+08:00",
-      "next_run_at": "2026-05-05T21:00:00+08:00",
-      "last_run_at": "2026-05-04T21:01:48.536387+08:00",
+      "next_run_at": "2026-05-12T21:00:00+08:00",
+      "last_run_at": "2026-05-11T21:08:07.734150+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -265,19 +265,19 @@
       "schedule_display": "55 8 * * 1-5",
       "repeat": {
         "times": 999,
-        "completed": 4
+        "completed": 9
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T22:12:43.939861+08:00",
-      "next_run_at": "2026-05-05T08:55:00+08:00",
-      "last_run_at": "2026-05-04T08:58:34.612115+08:00",
+      "next_run_at": "2026-05-12T08:55:00+08:00",
+      "last_run_at": "2026-05-11T09:13:01.629455+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
-      "deliver": "origin",
+      "deliver": "feishu:oc_225984458dcc3d3ddc03dce49b102f84",
       "origin": {
         "platform": "feishu",
         "chat_id": "oc_9f55bbb7b79d2426fcd3f0aad2b07d56",
@@ -289,7 +289,7 @@
     },
     {
       "id": "1150577a911f",
-      "name": "\u8d22\u8054\u793e\u6570\u636e\u770b\u76d8\u91c7\u96c6",
+      "name": "\ud83d\udcca \u8d22\u8054\u793e\u6570\u636e\u770b\u76d8\u91c7\u96c6 18:15",
       "prompt": "## \u4efb\u52a1\uff1a\u6bcf\u65e517:50 \u91c7\u96c6\u300c\u6570\u636e\u770b\u76d8\u300d\u5165\u5e93\n\n\u8bbf\u95ee https://www.cls.cn/subject/10056 \uff0c\u89e3\u6790\u5f53\u65e5\u300c\u6570\u636e\u770b\u76d8\u300d\u5185\u5bb9\uff0c\u5165\u5e93SQLite\uff08~/stock_knowledge/stock_data.db\uff09\uff0c\u5e76\u8f93\u51fa\u6458\u8981\u3002\n\n### \u6267\u884c\u6b65\u9aa4\n\n**\u7b2c\u4e00\u6b65\uff1a\u91c7\u96c6\u9875\u9762**\n\u7528 browser_navigate + browser_snapshot \u8bbf\u95ee https://www.cls.cn/subject/10056\n\u63d0\u53d6\u9875\u9762\u5185\u5bb9\uff0c\u5305\u62ec\uff1a\n- \u4eca\u65e5\u8d44\u91d1\u6d41\u5411\n- \u677f\u5757\u8d44\u91d1\u8fdb\u51fa\n- \u6da8\u8dcc\u505c\u6570\u91cf\n- \u9f99\u5934\u80a1\u8868\u73b0\n- \u6da8\u505c/\u8dcc\u505c\u7edf\u8ba1\n- \u5e02\u573a\u60c5\u7eea\u6307\u6807\n\n**\u7b2c\u4e8c\u6b65\uff1a\u5165\u5e93SQLite**\n```python\nimport sqlite3, json\nfrom datetime import datetime\n\nconn = sqlite3.connect('/home/user/stock_knowledge/stock_data.db')\ncursor = conn.cursor()\n\ncursor.execute('''\nCREATE TABLE IF NOT EXISTS data_kanpan (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    crawl_date TEXT,\n    content TEXT,\n    source_url TEXT,\n    created_at TEXT\n)\n''')\n\ntoday = datetime.now().strftime('%Y-%m-%d')\ncontent = \"\u4ece\u9875\u9762\u63d0\u53d6\u7684\u6570\u636e\u770b\u76d8\u5185\u5bb9\"  # \u5b9e\u9645\u4ecebrowser_snapshot\u83b7\u53d6\n\ncursor.execute('''\n    INSERT INTO data_kanpan (crawl_date, content, source_url, created_at)\n    VALUES (?, ?, ?, ?)\n''', (today, content, 'https://www.cls.cn/subject/10056',\n      datetime.now().strftime('%Y-%m-%d %H:%M:%S')))\n\nconn.commit()\nconn.close()\nprint(\"\u6570\u636e\u770b\u76d8\u5165\u5e93\u6210\u529f\")\n```\n\n**\u7b2c\u4e09\u6b65\uff1a\u8f93\u51fa\u6458\u8981**\n```\n\ud83d\udcca \u6570\u636e\u770b\u76d8\uff08\u65e5\u671f\uff09\n\u2022 \u8d44\u91d1\u6d41\u5411\uff1a...\n\u2022 \u677f\u5757\u52a8\u6001\uff1a...\n\u2022 \u6da8\u8dcc\u505c\uff1a...\n\u2022 \u5e02\u573a\u60c5\u7eea\uff1a...\n\u5df2\u5165\u5e93\n```",
       "skills": [],
       "skill": null,
@@ -300,21 +300,21 @@
       "context_from": null,
       "schedule": {
         "kind": "cron",
-        "expr": "50 17 * * 1-5",
-        "display": "50 17 * * 1-5"
+        "expr": "15 18 * * 1-5",
+        "display": "15 18 * * 1-5"
       },
-      "schedule_display": "50 17 * * 1-5",
+      "schedule_display": "15 18 * * 1-5",
       "repeat": {
         "times": 999,
-        "completed": 4
+        "completed": 9
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T22:27:24.501326+08:00",
-      "next_run_at": "2026-05-05T17:50:00+08:00",
-      "last_run_at": "2026-05-04T17:54:12.534625+08:00",
+      "next_run_at": "2026-05-12T18:15:00+08:00",
+      "last_run_at": "2026-05-11T18:18:45.216495+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -347,19 +347,19 @@
       "schedule_display": "45 12 * * 1-5",
       "repeat": {
         "times": 999,
-        "completed": 4
+        "completed": 9
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-28T22:29:01.150300+08:00",
-      "next_run_at": "2026-05-05T12:45:00+08:00",
-      "last_run_at": "2026-05-04T12:50:49.360680+08:00",
+      "next_run_at": "2026-05-12T12:45:00+08:00",
+      "last_run_at": "2026-05-11T12:47:19.858246+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
-      "deliver": "origin",
+      "deliver": "feishu:oc_225984458dcc3d3ddc03dce49b102f84",
       "origin": {
         "platform": "feishu",
         "chat_id": "oc_9f55bbb7b79d2426fcd3f0aad2b07d56",
@@ -388,15 +388,15 @@
       "schedule_display": "0 2 * * *",
       "repeat": {
         "times": null,
-        "completed": 5
+        "completed": 12
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-29T12:43:16.910050+08:00",
-      "next_run_at": "2026-05-05T02:00:00+08:00",
-      "last_run_at": "2026-05-04T02:00:53.261380+08:00",
+      "next_run_at": "2026-05-12T02:00:00+08:00",
+      "last_run_at": "2026-05-11T02:00:53.924942+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -429,19 +429,19 @@
       "schedule_display": "0 8 * * *",
       "repeat": {
         "times": null,
-        "completed": 5
+        "completed": 13
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-29T12:43:39.059384+08:00",
-      "next_run_at": "2026-05-05T08:00:00+08:00",
-      "last_run_at": "2026-05-04T08:00:50.081610+08:00",
+      "next_run_at": "2026-05-12T08:00:00+08:00",
+      "last_run_at": "2026-05-11T08:01:22.426222+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
-      "deliver": "origin",
+      "deliver": "feishu:oc_225984458dcc3d3ddc03dce49b102f84",
       "origin": {
         "platform": "feishu",
         "chat_id": "oc_9f55bbb7b79d2426fcd3f0aad2b07d56",
@@ -470,19 +470,19 @@
       "schedule_display": "10 8 * * *",
       "repeat": {
         "times": null,
-        "completed": 5
+        "completed": 12
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-29T12:43:47.620025+08:00",
-      "next_run_at": "2026-05-05T08:10:00+08:00",
-      "last_run_at": "2026-05-04T08:11:28.965780+08:00",
+      "next_run_at": "2026-05-12T08:10:00+08:00",
+      "last_run_at": "2026-05-11T08:11:00.323642+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
-      "deliver": "origin",
+      "deliver": "feishu:oc_225984458dcc3d3ddc03dce49b102f84",
       "origin": {
         "platform": "feishu",
         "chat_id": "oc_9f55bbb7b79d2426fcd3f0aad2b07d56",
@@ -511,19 +511,19 @@
       "schedule_display": "20 8 * * *",
       "repeat": {
         "times": null,
-        "completed": 5
+        "completed": 12
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-29T12:43:56.198937+08:00",
-      "next_run_at": "2026-05-05T08:20:00+08:00",
-      "last_run_at": "2026-05-04T08:21:04.347334+08:00",
+      "next_run_at": "2026-05-12T08:20:00+08:00",
+      "last_run_at": "2026-05-11T08:20:30.407144+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
-      "deliver": "origin",
+      "deliver": "feishu:oc_225984458dcc3d3ddc03dce49b102f84",
       "origin": {
         "platform": "feishu",
         "chat_id": "oc_9f55bbb7b79d2426fcd3f0aad2b07d56",
@@ -552,19 +552,19 @@
       "schedule_display": "0 14 * * 4",
       "repeat": {
         "times": 999,
-        "completed": 1
+        "completed": 2
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-29T15:27:54.077107+08:00",
-      "next_run_at": "2026-05-07T14:00:00+08:00",
-      "last_run_at": "2026-04-30T14:00:48.358737+08:00",
+      "next_run_at": "2026-05-14T14:00:00+08:00",
+      "last_run_at": "2026-05-07T14:00:33.287829+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
-      "deliver": "origin",
+      "deliver": "feishu:oc_225984458dcc3d3ddc03dce49b102f84",
       "origin": {
         "platform": "feishu",
         "chat_id": "oc_9f55bbb7b79d2426fcd3f0aad2b07d56",
@@ -593,16 +593,16 @@
       "schedule_display": "0 1 * * 2",
       "repeat": {
         "times": 999,
-        "completed": 0
+        "completed": 1
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-05-03T19:09:47.757759+08:00",
-      "next_run_at": "2026-05-12T01:00:00+08:00",
-      "last_run_at": null,
-      "last_status": null,
+      "next_run_at": "2026-05-19T01:00:00+08:00",
+      "last_run_at": "2026-05-05T01:01:23.432790+08:00",
+      "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
       "deliver": "feishu:oc_225984458dcc3d3ddc03dce49b102f84",
@@ -614,7 +614,171 @@
       },
       "enabled_toolsets": null,
       "workdir": null
+    },
+    {
+      "id": "024669ddb8e3",
+      "name": "\ud83d\udce3 \u76d8\u9762\u70ed\u70b9\u65e5\u62a5 20:00",
+      "prompt": "## \u4efb\u52a1\uff1a\u6bcf\u65e5\u76d8\u9762\u70ed\u70b9\u65e5\u62a5\u751f\u6210\u5e76\u63a8\u9001\u98de\u4e66\n\n### \u6267\u884c\u6b65\u9aa4\n\n**\u7b2c\u4e00\u6b65\uff1a\u751f\u6210\u70ed\u70b9\u65e5\u62a5**\n\n```bash\ncd /home/admin/stock_knowledge && source venv/bin/activate && python3 scripts/daily_hot_report.py\n```\n\n\u811a\u672c\u4f1a\u81ea\u52a8\u91c7\u96c6\u5f53\u5929\u6570\u636e\u5e76\u8f93\u51fa\u3002\n\n**\u7b2c\u4e8c\u6b65\uff1a\u8bfb\u53d6\u751f\u6210\u7684\u65e5\u62a5\u6587\u672c\uff0c\u63a8\u9001\u98de\u4e66**\n\n\u7528 `cat` \u8bfb\u53d6 `/home/admin/stock_knowledge/reports/\u70ed\u70b9\u65e5\u62a5_$(date +\\%Y\\%m\\%d).txt`\uff0c\u82e5\u65e0\u5219\u8bfb `\u70ed\u70b9\u65e5\u62a5_$(date +\\%Y\\%m\\%d -1).txt`\u3002\n\n\u7528 Python \u63a8\u9001\u98de\u4e66\uff08\u4f7f\u7528 feishu_sender.py\uff09\uff1a\n\n```python\nimport sys, os\nsys.path.insert(0, '/home/admin/stock_knowledge/scripts')\nfrom feishu_sender import send_to_feishu\n\ntoday = os.popen(\"date +\\%Y\\%m\\%d\").read().strip()\nfor check_date in [today, str(int(today)-1)]:\n    path = f'/home/admin/stock_knowledge/reports/\u70ed\u70b9\u65e5\u62a5_{check_date}.txt'\n    if os.path.exists(path):\n        with open(path) as f:\n            content = f.read()\n        break\n\nwebhook = os.environ.get('FEISHU_WEBHOOK_URL')\nsecret = os.environ.get('FEISHU_WEBHOOK_SECRET', '')\nif webhook:\n    from feishu_sender import send_to_feishu\n    result = send_to_feishu(content, webhook=webhook, secret=secret if secret else None)\n    print(f\"\u98de\u4e66\u63a8\u9001\u7ed3\u679c: {result}\")\nelse:\n    print(\"\u672a\u914d\u7f6eFEISHU_WEBHOOK_URL\uff0c\u8df3\u8fc7\u63a8\u9001\")\n```\n\n### \u8f93\u51fa\u8981\u6c42\n- \u8bfb\u53d6\u751f\u6210\u7684\u70ed\u70b9\u65e5\u62a5\u5b8c\u6574\u5185\u5bb9\u4f5c\u4e3a\u6700\u7ec8\u56de\u590d\n- \u683c\u5f0f\uff1a\u76f4\u63a5\u8d34\u65e5\u62a5\u5168\u6587\uff0c\u4e0d\u8981\u6539\u5199\n- \u98de\u4e66\u63a8\u9001\u6210\u529f/\u5931\u8d25\u5747\u544a\u77e5",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 20 * * 1-5",
+        "display": "0 20 * * 1-5"
+      },
+      "schedule_display": "0 20 * * 1-5",
+      "repeat": {
+        "times": 999,
+        "completed": 3
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-05-07T22:41:17.295940+08:00",
+      "next_run_at": "2026-05-12T20:00:00+08:00",
+      "last_run_at": "2026-05-11T20:01:36.215548+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_225984458dcc3d3ddc03dce49b102f84",
+      "origin": {
+        "platform": "feishu",
+        "chat_id": "oc_9f55bbb7b79d2426fcd3f0aad2b07d56",
+        "chat_name": "oc_9f55bbb7b79d2426fcd3f0aad2b07d56",
+        "thread_id": null
+      },
+      "enabled_toolsets": null,
+      "workdir": null
+    },
+    {
+      "id": "c2f695ae4267",
+      "name": "\ud83d\udcc8 \u677f\u5757\u8f6e\u52a8\u5206\u6790 19:30",
+      "prompt": "## \u4efb\u52a1\uff1a\u6bcf\u65e5\u6536\u76d8\u540e\u677f\u5757\u8f6e\u52a8\u5206\u6790\n\n### \u6267\u884c\u6b65\u9aa4\n\n**\u7b2c\u4e00\u6b65\uff1a\u8fd0\u884c\u8f6e\u52a8\u5206\u6790\u811a\u672c**\n\n```bash\ncd /home/admin/stock_knowledge && source venv/bin/activate && python3 scripts/sector_rotation_analysis.py\n```\n\n**\u7b2c\u4e8c\u6b65\uff1a\u8bfb\u53d6\u751f\u6210\u7684\u62a5\u544a**\n\n```bash\ncat /home/admin/stock_knowledge/reports/\u677f\u5757\u8f6e\u52a8\u5206\u6790_$(date +\\%Y\\%m\\%d).txt\n```\n\n**\u7b2c\u4e09\u6b65\uff1a\u63a8\u9001\u98de\u4e66\uff08\u5982\u679c\u914d\u7f6e\u4e86webhook\uff09**\n\n```python\nimport sys, os\nsys.path.insert(0, '/home/admin/stock_knowledge/scripts')\n\ntoday = os.popen(\"date +\\%Y\\%m\\%d\").read().strip()\npath = f'/home/admin/stock_knowledge/reports/\u677f\u5757\u8f6e\u52a8\u5206\u6790_{today}.txt'\nif os.path.exists(path):\n    with open(path) as f:\n        content = f.read()\n\nwebhook = os.environ.get('FEISHU_WEBHOOK_URL')\nsecret = os.environ.get('FEISHU_WEBHOOK_SECRET', '')\nif webhook:\n    from feishu_sender import send_to_feishu\n    result = send_to_feishu(content, webhook=webhook, secret=secret if secret else None)\n    print(f\"\u98de\u4e66\u63a8\u9001\u7ed3\u679c: {result}\")\nelse:\n    print(\"\u672a\u914d\u7f6eFEISHU_WEBHOOK_URL\uff0c\u8df3\u8fc7\u63a8\u9001\")\n```\n\n### \u8f93\u51fa\u8981\u6c42\n- \u5b8c\u6574\u8bfb\u53d6\u62a5\u544a\u5185\u5bb9\u4f5c\u4e3a\u56de\u590d\n- \u683c\u5f0f\uff1a\u76f4\u63a5\u8d34\u62a5\u544a\u5168\u6587\uff0c\u4e0d\u6539\u5199\n- \u544a\u77e5\u63a8\u9001\u72b6\u6001",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 19 * * 1-5",
+        "display": "30 19 * * 1-5"
+      },
+      "schedule_display": "30 19 * * 1-5",
+      "repeat": {
+        "times": 999,
+        "completed": 3
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-05-07T22:49:16.543833+08:00",
+      "next_run_at": "2026-05-12T19:30:00+08:00",
+      "last_run_at": "2026-05-11T19:35:30.977626+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_225984458dcc3d3ddc03dce49b102f84",
+      "origin": {
+        "platform": "feishu",
+        "chat_id": "oc_9f55bbb7b79d2426fcd3f0aad2b07d56",
+        "chat_name": "oc_9f55bbb7b79d2426fcd3f0aad2b07d56",
+        "thread_id": null
+      },
+      "enabled_toolsets": null,
+      "workdir": null
+    },
+    {
+      "id": "e47a619aeec8",
+      "name": "\u6bcf\u65e5\u4e3b\u529b\u884c\u4e3a\u8bc6\u522b\u80fd\u529b\u63d0\u5347",
+      "prompt": "\n# \u4e3b\u529b\u884c\u4e3a\u8bc6\u522b\u80fd\u529b\u63d0\u5347 - \u6bcf\u65e5\u590d\u76d8\u4efb\u52a1\n\n## \u4efb\u52a1\u76ee\u6807\n\u6bcf\u5929\u6536\u76d8\u540e\uff0c\u81ea\u52a8\u91c7\u96c6\u5e76\u5206\u6790\u5f53\u65e5\u5168\u5e02\u573a\u4e3b\u529b\u884c\u4e3a\u6570\u636e\uff0c\u8bc6\u522b\u5178\u578b\u4e3b\u529b\u8fd0\u4f5c\u6a21\u5f0f\uff0c\u8f93\u51fa\u590d\u76d8\u62a5\u544a\uff0c\u4e3a\u540e\u7eed\u5206\u6790\u6a21\u578b\u79ef\u7d2f\u7ecf\u9a8c\u3002\n\n## \u5f53\u5929\u65e5\u671f\n\uff08\u7531\u7cfb\u7edf\u81ea\u52a8\u6ce8\u5165\uff1a2026-05-08\uff09\n\n## \u6267\u884c\u6b65\u9aa4\n\n### Step 1\uff1a\u91c7\u96c6\u5f53\u65e5\u5168\u5e02\u573a\u6da8\u5e45\u524d\u5217\u4e2a\u80a1\uff08\u91cd\u70b9\u5206\u6790\u4e3b\u529b\u884c\u4e3a\uff09\n\u7528\u4ee5\u4e0b\u4e1c\u8d22API\u91c7\u96c6\u5f53\u65e5\u4e2a\u80a1\u6570\u636e\uff1a\n\n```python\nimport subprocess, json, pandas as pd\nfrom datetime import datetime, timedelta\n\ndef curl_json(url, timeout=30):\n    try:\n        r = subprocess.run([\"curl\",\"-s\",url,\"-H\",\"User-Agent: Mozilla/5.0\"], capture_output=True, text=True, timeout=timeout)\n        return json.loads(r.stdout)\n    except:\n        return {}\n\n# \u91c7\u96c6\u6caa\u5e02\u6da8\u5e45\u524d30\u53ea\u4e2a\u80a1\uff08\u4eca\u65e5\uff09\nurl = (\"https://push2delay.eastmoney.com/api/qt/clist/get\"\n       \"?pn=1&pz=30&po=1&np=1&ut=bd1d9ddb04089700cf9c27f6f7426281\"\n       \"&fltt=2&invt=2&fid=f3&fs=m:1+t:2\"\n       \"&fields=f12,f14,f2,f3,f5,f6,f8,f10,f62,f184\")\nr = curl_json(url)\nstocks = []\nif r.get('data') and r['data'].get('diff'):\n    for item in r['data']['diff']:\n        stocks.append({\n            'code': item.get('f12',''),\n            'name': item.get('f14',''),\n            'price': item.get('f2',0)/100,\n            'pct': item.get('f3',0)/100,\n            'vol': item.get('f5',0),\n            'amount': item.get('f6',0)/10000,  # \u4e07\u5143\n            'turn': item.get('f8',0)/100 if item.get('f8') else 0,\n            'main_force': item.get('f62',0)/10000,  # \u4e07\u5143\n            'main_ratio': item.get('f184',0)/100 if item.get('f184') else 0  # \u4e3b\u529b\u51c0\u6d41\u5165\u5360\u6bd4\n        })\n\n# \u540c\u7406\u91c7\u96c6\u6df1\u5e02\nurl2 = (\"https://push2delay.eastmoney.com/api/qt/clist/get\"\n        \"?pn=1&pz=30&po=1&np=1&ut=bd1d9ddb04089700cf9c27f6f7426281\"\n        \"&fltt=2&invt=2&fid=f3&fs=m:0+t:2\"\n        \"&fields=f12,f14,f2,f3,f5,f6,f8,f10,f62,f184\")\nr2 = curl_json(url2)\nif r2.get('data') and r2['data'].get('diff'):\n    for item in r2['data']['diff']:\n        stocks.append({\n            'code': item.get('f12',''),\n            'name': item.get('f14',''),\n            'price': item.get('f2',0)/100,\n            'pct': item.get('f3',0)/100,\n            'vol': item.get('f5',0),\n            'amount': item.get('f6',0)/10000,\n            'turn': item.get('f8',0)/100 if item.get('f8') else 0,\n            'main_force': item.get('f62',0)/10000,\n            'main_ratio': item.get('f184',0)/100 if item.get('f184') else 0\n        })\n\ndf = pd.DataFrame(stocks)\nprint(f\"\u91c7\u96c6\u5230 {len(df)} \u53ea\u4e2a\u80a1\")\n```\n\n### Step 2\uff1a\u7b5b\u9009\u5178\u578b\u4e3b\u529b\u884c\u4e3a\u4e2a\u80a1\n\u4ece\u4e0a\u8ff0\u6570\u636e\u4e2d\u7b5b\u9009\u51fa\u5177\u6709\u5178\u578b\u4e3b\u529b\u884c\u4e3a\u7279\u5f81\u7684\u80a1\u7968\uff1a\n\n**\u4e3b\u529b\u884c\u4e3a\u8bc6\u522b\u6807\u51c6\uff08\u4f18\u5148\u7ea7\u4ece\u9ad8\u5230\u4f4e\uff09\uff1a**\n1. **\u5efa\u4ed3\u578b**\uff1a\u6362\u624b\u73873~8% + \u6da8\u5e452~6% + \u4e3b\u529b\u51c0\u6d41\u5165\u5360\u6bd4>20%\n2. **\u62c9\u5347\u578b**\uff1a\u6362\u624b\u7387>5% + \u6da8\u5e45>5% + \u5927\u5355\u51c0\u6d41\u5165>1\u4ebf + \u80a1\u4ef7\u5904\u4e8e\u4f4e\u4f4d\n3. **\u6d17\u76d8\u578b**\uff1a\u6da8\u5e450~3% + \u6362\u624b\u7387>5% + \u632f\u5e45>4% + \u6536\u957f\u4e0b\u5f71\u7ebf\n4. **\u51fa\u8d27\u578b**\uff1a\u6da8\u5e45>3% + \u6362\u624b\u7387>8% + \u4e3b\u529b\u51c0\u6d41\u5165\u4e3a\u8d1f\uff08\u8fb9\u6da8\u8fb9\u51fa\uff09\n5. **\u63a7\u76d8\u578b**\uff1a\u6362\u624b\u73872~4% + \u6da8\u5e45\u5e73\u7a33 + \u632f\u5e45\u6781\u5c0f\uff08<2%\uff09\n\n```python\n# \u7b5b\u9009\u793a\u4f8b\uff08\u4f2a\u4ee3\u7801\u601d\u8def\uff09\n# \u5efa\u4ed3\u578b\uff1a\u6362\u624b3-8% + \u6da8\u5e452-6% + \u4e3b\u529b\u51c0\u6d41\u5165>20%\njiancang = df[(df['turn']>=3)&(df['turn']<=8)&(df['pct']>=2)&(df['pct']<=6)&(df['main_ratio']>20)]\n# \u62c9\u5347\u578b\uff1a\u6362\u624b>5% + \u6da8\u5e45>5% + \u4e3b\u529b\u51c0\u6d41\u5165>1\u4ebf\nlasheng = df[(df['turn']>5)&(df['pct']>5)&(df['main_force']>10000)]\n# \u51fa\u8d27\u578b\uff1a\u6da8\u5e45>3% + \u6362\u624b>8% + \u4e3b\u529b\u51c0\u6d41\u5165<0\nchuho = df[(df['pct']>3)&(df['turn']>8)&(df['main_force']<0)]\n```\n\n### Step 3\uff1a\u91cd\u70b9\u5206\u6790\u4eca\u65e5\u4e3b\u529b\u884c\u4e3a\u6a21\u5f0f\n\u8f93\u51fa\u4e00\u6bb5\u5206\u6790\uff1a\n- \u4eca\u65e5\u4e3b\u529b\u5efa\u4ed3/\u62c9\u5347/\u6d17\u76d8/\u51fa\u8d27\u5404\u591a\u5c11\u53ea\n- \u4e3b\u529b\u51c0\u6d41\u5165\u6700\u591a\u677f\u5757\uff08\u524d3\uff09\n- \u4e3b\u529b\u51c0\u6d41\u5165\u6700\u591a\u4e2a\u80a1\uff08\u524d5\uff09\n- \u4e3b\u529b\u51c0\u6d41\u51fa\u6700\u591a\u4e2a\u80a1\uff08\u524d5\uff09\n- \u5178\u578b\u4e3b\u529b\u884c\u4e3a\u6848\u4f8b\uff08\u5efa\u4ed3\u578b2\u53ea + \u62c9\u5347\u578b1\u53ea\uff09\n\n### Step 4\uff1a\u5bf9\u6bd4\u8fd1\u671f\u4e3b\u529b\u884c\u4e3a\u89c4\u5f8b\n\u7528 baostock \u91c7\u96c6\u8fd15\u65e5\u6570\u636e\uff0c\u5bf9\u6bd4\u5206\u6790\uff1a\n- \u8fd15\u65e5\u4e3b\u529b\u6301\u7eed\u51c0\u6d41\u5165\u4e2a\u80a1\uff08\u53ef\u80fd\u6709\u4e2d\u7ebf\u4e3b\u529b\u8fd0\u4f5c\uff09\n- \u8fd15\u65e5\u4e3b\u529b\u6301\u7eed\u51c0\u6d41\u51fa\u4e2a\u80a1\uff08\u8b66\u60d5\uff09\n- \u6362\u624b\u7387\u8fde\u7eed\u653e\u5927\u4e2a\u80a1\uff08\u4e3b\u529b\u5efa\u4ed3\u4fe1\u53f7\uff09\n\n```python\nimport baostock as bs, pandas as pd\n\n# \u5bf9\u8fd15\u65e5\u4e3b\u529b\u884c\u4e3a\u660e\u663e\u7684\u4e2a\u80a1\u505a\u6df1\u5ea6\u5206\u6790\n# \u9009\u53d6\u4eca\u65e5\u4e3b\u529b\u51c0\u6d41\u5165\u524d5\u7684\u4e2a\u80a1\uff0c\u91c7\u96c6\u8fd15\u65e5K\u7ebf\nfocus_codes = ['000600']  # \u52a8\u6001\u66ff\u6362\u4e3a\u5f53\u65e5\u4e3b\u529b\u91cd\u70b9\u4e2a\u80a1\n\nbs.login()\nfor code in focus_codes[:3]:\n    prefix = 'sz' if code.startswith(('0','2','3')) else 'sh'\n    rs = bs.query_history_k_data_plus(f'{prefix}.{code}',\n        'date,open,high,low,close,volume,amount,pctChg,turn',\n        start_date=(datetime.today()-timedelta(days=10)).strftime('%Y-%m-%d'),\n        end_date=datetime.today().strftime('%Y-%m-%d'),\n        frequency='d', adjustflag='2')\n    data = []\n    while rs.next():\n        data.append(rs.get_row_data())\n    df_k = pd.DataFrame(data, columns=rs.fields)\n    for col in ['open','high','low','close','volume','amount','pctChg','turn']:\n        df_k[col] = pd.to_numeric(df_k[col], errors='coerce')\n    print(f\"\\n=== {code} \u8fd15\u65e5K\u7ebf ===\")\n    for _, r in df_k.tail(5).iterrows():\n        print(f\"{r['date']} \u6536:{r['close']:.2f} \u6da8:{r['pctChg']:+.2f}% \u6362\u624b:{r['turn']:.2f}% \u91cf:{r['volume']/1e4:.0f}\u4e07\")\nbs.logout()\n```\n\n### Step 5\uff1a\u8f93\u51fa\u6bcf\u65e5\"\u4e3b\u529b\u884c\u4e3a\u6a21\u5f0f\"\u7ecf\u9a8c\u603b\u7ed3\n**\u5fc5\u987b\u5305\u542b\u4ee5\u4e0b\u5185\u5bb9\uff1a**\n\n1. **\u4eca\u65e5\u4e3b\u529b\u884c\u4e3a\u5173\u952e\u8bcd**\uff1a\u5168\u5e02\u573a\u4e3b\u529b\u4eca\u65e5\u6574\u4f53\u884c\u4e3a\u7279\u5f81\uff08\u4e00\u53e5\u8bdd\u603b\u7ed3\uff09\n2. **\u5178\u578b\u6848\u4f8b\u5206\u6790**\uff1a2\u4e2a\u5178\u578b\u4e3b\u529b\u884c\u4e3a\u4e2a\u80a1\uff08\u9009\u4eca\u65e5\u6700\u5178\u578b\u7684\uff09\uff0c\u6bcf\u4e2a\u5305\u542b\uff1a\n   - \u4e2a\u80a1\u540d\u79f0/\u4ee3\u7801\n   - \u4e3b\u529b\u884c\u4e3a\u7c7b\u578b\uff08\u5efa\u4ed3/\u62c9\u5347/\u6d17\u76d8/\u51fa\u8d27/\u63a7\u76d8\uff09\n   - \u8bc1\u636e\u94fe\uff08\u6362\u624b\u7387\u3001\u91cf\u80fd\u3001K\u7ebf\u5f62\u6001\u3001\u4e3b\u529b\u51c0\u6d41\u5165\u6570\u636e\uff09\n   - \u4e3b\u529b\u610f\u56fe\u63a8\u65ad\n3. **\u4e3b\u529b\u884c\u4e3a\u8bc6\u522b\u89c4\u5f8b**\uff1a\u4ece\u4eca\u65e5\u6848\u4f8b\u63d0\u70bc2~3\u6761\u53ef\u590d\u7528\u7684\u4e3b\u529b\u884c\u4e3a\u8bc6\u522b\u89c4\u5f8b\n4. **\u660e\u65e5\u5173\u6ce8\u65b9\u5411**\uff1a\u4e3b\u529b\u4eca\u65e5\u5efa\u4ed3\u4e2a\u80a1\u4e2d\uff0c\u660e\u65e5\u53ef\u80fd\u62c9\u5347\u7684\u6807\u7684\uff08\u6362\u624b\u73873-8%\u3001\u7f29\u91cf\u6574\u7406\u3001\u5c3e\u76d8\u5f02\u52a8\uff09\n\n### Step 6\uff1a\u5c06\u4eca\u65e5\u4e3b\u529b\u884c\u4e3a\u6570\u636e\u4fdd\u5b58\u5230\u672c\u5730\u79ef\u7d2f\u5e93\n\u5c06\u4eca\u65e5\u4e3b\u529b\u884c\u4e3a\u7279\u5f81\u6570\u636e\u8ffd\u52a0\u5199\u5165CSV\u6587\u4ef6\uff1a\n- \u4fdd\u5b58\u8def\u5f84\uff1a`/home/admin/stock_knowledge/data/daily_main_player_analysis.csv`\n- \u5b57\u6bb5\uff1adate, code, name, pct_chg, turn, main_force(\u4e07\u5143), main_ratio, behavior_type, pattern\n\n## \u8f93\u51fa\u683c\u5f0f\u8981\u6c42\n- \u5168\u7a0b\u4e2d\u6587\n- \u4e3b\u529b\u884c\u4e3a\u7c7b\u578b\u7528\u4e0d\u540c\u6807\u8bb0\uff1a\ud83d\udfe2\u5efa\u4ed3 \ud83d\udd35\u62c9\u5347 \ud83d\udfe1\u6d17\u76d8 \ud83d\udd34\u51fa\u8d27 \u26aa\u63a7\u76d8\n- \u91cd\u70b9\u6570\u636e\u52a0\u7c97\n- \u660e\u65e5\u5173\u6ce8\u4e2a\u80a1\u5355\u72ec\u5217\u51fa\n\n## \u6ce8\u610f\u4e8b\u9879\n- \u6240\u6709\u6570\u636e\u91c7\u96c6\u5747\u52a0 try/except\uff0c\u5931\u8d25\u5219\u6253\u5370\"\u5f53\u65e5\u6570\u636e\u83b7\u53d6\u5931\u8d25\uff0c\u8df3\u8fc7\"\n- \u4f18\u5148\u7528\u4e1c\u8d22curl API\uff0c\u5931\u8d25\u5219\u7528akshare\u5907\u63f4\n- \u4e0d\u8981\u7528\u6d4f\u89c8\u5668\u5de5\u5177\n- \u4eca\u65e5\u662f\u666e\u901a\u4ea4\u6613\u65e5\uff0c\u82e5\u4e3a\u8282\u5047\u65e5/\u5468\u672b\u5219\u8f93\u51fa\"\u4eca\u65e5\u975e\u4ea4\u6613\u65e5\uff0c\u8df3\u8fc7\"\n",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 21 * * 1-5",
+        "display": "0 21 * * 1-5"
+      },
+      "schedule_display": "0 21 * * 1-5",
+      "repeat": {
+        "times": null,
+        "completed": 2
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-05-08T15:18:28.799263+08:00",
+      "next_run_at": "2026-05-12T21:00:00+08:00",
+      "last_run_at": "2026-05-11T21:11:13.446959+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_225984458dcc3d3ddc03dce49b102f84",
+      "origin": {
+        "platform": "feishu",
+        "chat_id": "oc_9f55bbb7b79d2426fcd3f0aad2b07d56",
+        "chat_name": "oc_9f55bbb7b79d2426fcd3f0aad2b07d56",
+        "thread_id": null
+      },
+      "enabled_toolsets": null,
+      "workdir": null
+    },
+    {
+      "id": "0ba2cd348233",
+      "name": "\ud83d\udd34 \u6da8\u505c\u590d\u76d8\u91c7\u96c6\u5165\u5e93 18:35",
+      "prompt": "## \u4efb\u52a1\uff1a\u6bcf\u65e5\u6536\u76d8\u540e\u91c7\u96c6\u6da8\u505c\u590d\u76d8\u6570\u636e\u5e76\u5165\u5e93\n\n**\u6267\u884c\u811a\u672c**\uff1a\n```bash\ncd ~/stock_knowledge && source venv/bin/activate && python3 scripts/collect_zt_data.py\n```\n\n\u811a\u672c\u81ea\u52a8\u91c7\u96c6\u5f53\u65e5\uff08\u4ea4\u6613\u65e5\u4e0b\u534816:00\u540e\u8fd0\u884c\uff0c\u65e5\u671f\u81ea\u52a8\u5224\u65ad\uff09\u6da8\u8dcc\u505c\u6570\u636e\uff1a\n- \u6570\u636e\u6e90\uff1aAKShare\uff08\u4e1c\u65b9\u8d22\u5bcc\uff09\n- \u5165\u5e93\uff1a~/stock_knowledge/database/stock_data.db\uff08\u8868 daily_zt_stocks + daily_market_summary\uff09\n- JSON\uff1a~/stock_knowledge/reports/zt_{date}.json\n\n\u65e0\u9700\u989d\u5916\u8f93\u51fa\uff0c\u811a\u672c\u81ea\u5e26\u6253\u5370\u3002",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "35 18 * * 1-5",
+        "display": "35 18 * * 1-5"
+      },
+      "schedule_display": "35 18 * * 1-5",
+      "repeat": {
+        "times": 999,
+        "completed": 1
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-05-10T22:40:00.671307+08:00",
+      "next_run_at": "2026-05-12T18:35:00+08:00",
+      "last_run_at": "2026-05-11T18:36:08.482991+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "local",
+      "origin": {
+        "platform": "feishu",
+        "chat_id": "oc_9f55bbb7b79d2426fcd3f0aad2b07d56",
+        "chat_name": "oc_9f55bbb7b79d2426fcd3f0aad2b07d56",
+        "thread_id": null
+      },
+      "enabled_toolsets": null,
+      "workdir": null
     }
   ],
-  "updated_at": "2026-05-05T01:00:53.678507+08:00"
+  "updated_at": "2026-05-12T01:00:18.514289+08:00"
 }
