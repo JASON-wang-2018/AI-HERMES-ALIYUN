@@ -789,8 +789,38 @@ def generate_full_report(
     pb_def = PATH_DEFS[top_paths[1]]
     pc_def = PATH_DEFS[top_paths[2]]
 
-    # 止损（提前计算，供路径价位使用）
-    stop_loss = round(max(last_close * 0.93, boll_l * 0.98) / 0.05) * 0.05
+    # ============================================================
+    # P2: 止损止盈量化体系（根据三维评分动态调整）
+    # ============================================================
+
+    # --- 分档止损 ---
+    # 警戒线（轻度警告，尚未触发止损）
+    warn_line = round(last_close * 0.97 / 0.05) * 0.05
+    # 硬止损（标准止损，触发减仓50%）
+    hard_stop = round(max(last_close * 0.93, boll_l * 0.98) / 0.05) * 0.05
+    # 终极止损（BOLL下轨失守，趋势破坏，清仓）
+    final_stop = round(boll_l / 0.05) * 0.05
+
+    # --- 分档止盈 ---
+    # 第一止盈位：BOLL上轨×1.1（约10%~20%空间）
+    tp1 = round(boll_u * 1.1 / 0.05) * 0.05
+    tp1_space = (tp1 - last_close) / last_close * 100
+    # 第二止盈位：BOLL上轨×1.2（约20%~35%空间）
+    tp2 = round(boll_u * 1.2 / 0.05) * 0.05
+    tp2_space = (tp2 - last_close) / last_close * 100
+    # 第三止盈位：前期高点（近20日最高）
+    tp3 = round(high_20 * 1.02 / 0.05) * 0.05
+    tp3_space = (tp3 - last_close) / last_close * 100
+
+    # --- 风险收益比 ---
+    risk_hard = last_close - hard_stop          # 硬止损风险幅度
+    reward_tp1 = tp1 - last_close               # 第一止盈空间
+    reward_tp2 = tp2 - last_close               # 第二止盈空间
+    rr_tp1 = round(reward_tp1 / risk_hard, 2) if risk_hard > 0 else 0  # R/R比（第一止盈）
+    rr_tp2 = round(reward_tp2 / risk_hard, 2) if risk_hard > 0 else 0  # R/R比（第二止盈）
+
+    # 供路径价位使用的原始止损变量（保持兼容）
+    stop_loss = hard_stop
 
     # 根据路径类型计算关键价位
     def path_price_range(path_key, latest_close, ma20, ma10, boll_u, boll_m, boll_l, stop_loss):
@@ -1057,6 +1087,32 @@ def generate_full_report(
         comp_star = '⭐'
         comp_judge = '极弱'
 
+    # ============================================================
+    # P2: 仓位管理 + 移动止盈（依赖comp_score，在综合评分之后计算）
+    # ============================================================
+    # --- 仓位管理（根据三维评分动态调整） ---
+    if comp_score >= 65:
+        pos_ratio = 0.60   # 建议仓位60%
+        risk_pct = 0.03    # 单次最大亏损3%
+        pos_tag = "⭐⭐⭐重仓候选"
+    elif comp_score >= 50:
+        pos_ratio = 0.40   # 建议仓位40%
+        risk_pct = 0.02    # 单次最大亏损2%
+        pos_tag = "⭐⭐标准仓位"
+    else:
+        pos_ratio = 0.20   # 建议仓位20%（轻仓试探）
+        risk_pct = 0.015   # 单次最大亏损1.5%
+        pos_tag = "⭐轻仓博弈"
+
+    # --- 移动止盈线（跟踪MA5/MA10） ---
+    trailing_stop_1 = f"收盘跌破MA5({ma5:.2f})→减半仓"
+    trailing_stop_2 = f"收盘跌破MA10({ma10:.2f})→清仓"
+
+    # --- 最大亏损额（假设10万本金） ---
+    capital = 100000
+    max_loss_per_trade = int(capital * risk_pct)
+    shares_if_buy = int((capital * pos_ratio) / last_close / 100) * 100
+
     print(f"\n{sep}")
     print(f"## 综合评分 · 技术60% + 资金20% + 基本面20%")
     print(f"\n**【三维评分】**")
@@ -1069,23 +1125,43 @@ def generate_full_report(
     print(f"\n**【综合总分】：{comp_score}/100 {comp_star}（{comp_judge}）**")
     print(f"  = 技术{comp_tech}分({score}×60%) + 资金{comp_cap}分({CAP_SCORE}/20×100×20%) + 基本{comp_fin}分({FIN_SCORE}/75×100×20%)")
 
-    # Step 4
+    # Step 4：P2量化风控体系
     print(f"\n{sep}")
-    print(f"## Step 4 · 风控要点")
+    print(f"## Step 4 · 量化风控体系（P2核心）")
+    print(f"\n**【分档止损】**")
+    print(f"- **警戒线**：{warn_line:.2f}元（-{((warn_line/last_close)-1)*100:.1f}%，轻仓注意，不触发止损）")
+    print(f"- **硬止损**：{hard_stop:.2f}元（-{((hard_stop/last_close)-1)*100:.1f}%，触发减仓50%）")
+    print(f"- **终极止损**：{final_stop:.2f}元（BOLL下轨失守，趋势破坏，清仓离场）")
+    print(f"\n**【分档止盈】**")
+    print(f"- **第一止盈**：{tp1:.2f}元（+{tp1_space:.1f}%，R/R={rr_tp1}，达此位减半仓）")
+    print(f"- **第二止盈**：{tp2:.2f}元（+{tp2_space:.1f}%，R/R={rr_tp2}，达此位再减半仓）")
+    print(f"- **第三止盈**：{tp3:.2f}元（+{tp3_space:.1f}%，清仓等回调）")
+    print(f"\n**【移动止盈线】**")
+    print(f"- {trailing_stop_1}")
+    print(f"- {trailing_stop_2}")
+    print(f"\n**【仓位管理】** {pos_tag}")
+    print(f"- 建议仓位：{pos_ratio*100:.0f}%（{capital/1e4:.0f}万本金中约{capital*pos_ratio/1e4:.1f}万）")
+    print(f"- 单次最大亏损：{max_loss_per_trade}元（{risk_pct*100:.1f}%本金）")
+    print(f"- 若买入：约{shares_if_buy}股（{last_close:.2f}×{shares_if_buy}≈{last_close*shares_if_buy/1e4:.1f}万）")
+    print(f"\n**【风险收益比】**")
+    rr_tag = '优秀(≥3:1)' if rr_tp1 >= 3 else ('良好(2~3:1)' if rr_tp1 >= 2 else ('一般(1~2:1)' if rr_tp1 >= 1 else '偏差(<1:1)'))
+    print(f"- 第一止盈R/R：{rr_tp1}:1（{rr_tag}）")
+    print(f"- 第二止盈R/R：{rr_tp2}:1")
+
+    # RSI/BOLL预警（保留原有）
     if rsi6 > 80:
-        print(f"- **RSI预警**：RSI6={rsi6:.1f}，连续3日>80极易触发短期回调，幅度约-10%~15%")
+        print(f"\n**【短线预警】**：RSI6={rsi6:.1f}，连续3日>80极易触发短期回调，幅度约-10%~15%")
     else:
-        print(f"- **RSI预警**：RSI6={rsi6:.1f}，偏热区，需关注是否转势")
+        print(f"\n**【短线预警】**：RSI6={rsi6:.1f}，偏热区，需关注是否转势")
     if pos_in_boll > 1:
-        print(f"- **BOLL突破有效性**：已突破上轨，需3个交易日确认不跌回{boll_u:.2f}")
+        print(f"**【BOLL突破】**：已突破上轨，需3个交易日确认不跌回{boll_u:.2f}")
     elif pos_in_boll > 0.8:
-        print(f"- **BOLL突破有效性**：位置{pos_in_boll:.1%}，距上轨约{round((1-pos_in_boll)*100)}个点，突破在即")
+        print(f"**【BOLL位置】**：{pos_in_boll:.1%}，距上轨约{round((1-pos_in_boll)*100)}个点，突破在即")
     else:
-        print(f"- **BOLL突破有效性**：位置{pos_in_boll:.1%}，距上轨约{round((1-pos_in_boll)*100)}个点，密切关注{boll_u:.2f}能否放量突破")
-    print(f"- **硬止损**：{stop_loss:.2f}（MA20）；{last_close*0.93:.2f}整体转空")
+        print(f"**【BOLL位置】**：{pos_in_boll:.1%}，距上轨约{round((1-pos_in_boll)*100)}个点，密切关注{boll_u:.2f}能否放量突破")
     if benefit_part:
-        print(f"- **高位筹码**：获利比例{benefit_part*100:.1f}%，{'高位风险注意了结' if benefit_part>0.85 else '正常'}")
-    print(f"- **量能预警**：{'爆量注意' if vol_ratio>1.5 else '量能正常'}；缩量整理是控盘信号，放量滞涨需警惕出货")
+        chip_warn = '高位风险注意了结' if benefit_part>0.85 else '正常'
+        print(f"**【筹码预警】**：获利比例{benefit_part*100:.1f}%，{chip_warn}")
 
     # Step 5
     print(f"\n{sep}")
