@@ -479,17 +479,16 @@ if fb and fb[3]:
 
 if fd and fd[3]:
     dupont_equity_mul = sf(fd[4])  # 权益乘数 1.35
-    dupont_asset_turn = sf(fd[5])  # 资产周转率 0.73
-    dupont_tax_burden = sp(fd[8])  # 税负 burden 82.0%
-    dupont_operating_profit = sp(fd[6])  # 营业利润/净利润比率（恒等于1，跳过）
-    dupont_net_profit = sp(fd[7])  # 净利率 6.10%
-    dupont_roic = sf(fd[3])  # ROE = 6.06%
+    dupont_asset_turn = sf(fd[5])  # 资产周转率 0.73（原始小数）
+    dupont_tax_burden = sf(fd[8])  # 税负 burden 0.82（原始小数）
+    dupont_operating_profit = sf(fd[6])  # 营业利润/净利润比率（恒=1，跳过）
+    dupont_net_profit = sf(fd[7])  # 净利率 0.061（原始小数，等于ROE/资产周转/权益乘数）
+    dupont_roic = sf(fd[3])  # dupontROE 原始值 0.0606
     print(f"  【杜邦分析(ROE拆解)】")
-    print(f"    净利率: {dupont_net_profit:.2f}%")
+    print(f"    净利率: {dupont_net_profit*100:.2f}%")
     print(f"    资产周转率: {dupont_asset_turn:.2f}次")
     print(f"    权益乘数: {dupont_equity_mul:.2f}{'（低杠杆）' if dupont_equity_mul<2 else '（合理）' if dupont_equity_mul<3 else '（高杠杆⚠️）'}")
-    roe_dr = dupont_net_profit * dupont_asset_turn * dupont_equity_mul / 10000  # 三值均为%，需/10000
-    print(f"    → 杜邦ROE = 净利率×周转率×权益乘数 = {roe_dr:.2f}%")
+    print(f"    → 杜邦ROE = 净利率×周转率×权益乘数 = {dupont_roic*100:.2f}%（直接取自fd[3]）")
 
 # —————— 财务综合评分 ——————
 fin_score = 0
@@ -971,7 +970,7 @@ def generate_full_report(
         print(f"- 流动比率: {current_ratio:.2f}{cr_tag} | 速动比率: {quick_ratio:.2f} | 资产负债率: {liability_to_asset:.2f}%{la_tag}")
     if dupont_net_profit:
         em_tag = '(低杠杆)' if dupont_equity_mul<2 else '(合理)' if dupont_equity_mul<3 else '(高杠杆⚠️)'
-        print(f"- 杜邦拆解: 净利率{dupont_net_profit:.2f}% × 周转率{dupont_asset_turn:.2f} × 权益乘数{dupont_equity_mul:.2f}{em_tag}")
+        print(f"- 杜邦拆解: 净利率{dupont_net_profit*100:.2f}% × 周转率{dupont_asset_turn:.2f} × 权益乘数{dupont_equity_mul:.2f}{em_tag}")
     fin_pct = round(FIN_SCORE/75*100) if FIN_SCORE else 0
     stars = '⭐'*min(5,max(1,fin_pct//20))
     print(f"\n- **财务综合评分**: {FIN_SCORE}/75（{stars}{'优秀' if fin_pct>=80 else '良好' if fin_pct>=60 else '一般' if fin_pct>=40 else '偏差'}）")
