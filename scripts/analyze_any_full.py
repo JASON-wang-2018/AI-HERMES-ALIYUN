@@ -381,7 +381,8 @@ except Exception as e:
     print(f"  ⚠️ 筹码分布计算失败: {e}")
 
 # ============================================================
-# Step 9: 基本面财务数据 (Baostock)
+# Step 9: 基本面财务数据 (Baostock) — 增强版
+# 包含：利润表 + 成长能力 + 运营能力 + 资产负债表 + 杜邦分析
 # ============================================================
 print("\n" + "=" * 65)
 print(f"【财务数据 Baostock】  代码：{code}")
@@ -398,6 +399,8 @@ fp   = gd(bs.query_profit_data(code=bs_code, year=2025, quarter=4))
 fp24 = gd(bs.query_profit_data(code=bs_code, year=2024, quarter=4))
 fg   = gd(bs.query_growth_data(code=bs_code, year=2025, quarter=4))
 fo   = gd(bs.query_operation_data(code=bs_code, year=2025, quarter=4))
+fb   = gd(bs.query_balance_data(code=bs_code, year=2025, quarter=4))
+fd   = gd(bs.query_dupont_data(code=bs_code, year=2025, quarter=4))
 bs.logout()
 
 sf = lambda v, d=0: float(v) if v and v not in ['', '-', None] else d
@@ -405,6 +408,9 @@ sp = lambda v: sf(v) * 100
 
 roe_2025 = np_margin = gp_margin = net_profit_2025 = eps_2025 = rev_2025 = None
 total_share = liq_share = yoy_ni = yoy_eps = nrt = invt = None
+current_ratio = quick_ratio = cash_ratio = liability_to_asset = None
+dupont_net_profit = dupont_asset_turn = dupont_equity_mul = dupont_tax_burden = dupont_operating_profit = None
+yoy_rev = revenue_2025 = revenue_2024 = net_profit_2024 = None
 
 if fp and fp[3]:
     eps_2025      = sf(fp[7])
@@ -415,7 +421,8 @@ if fp and fp[3]:
     roe_2025      = sp(fp[3])
     np_margin     = sp(fp[4])
     gp_margin      = sp(fp[5])
-    print(f"  【2025年年报】")
+    dupont_net_profit = sp(fp[4])  # 净利率作为杜邦起点
+    print(f"  【利润表 2025年年报】")
     print(f"    净资产收益率(ROE): {roe_2025:.2f}%")
     print(f"    销售净利率: {np_margin:.2f}%")
     print(f"    销售毛利率: {gp_margin:.2f}%")
@@ -424,17 +431,113 @@ if fp and fp[3]:
     print(f"    主营收入: {rev_2025/1e8:.2f}亿元")
     print(f"    总股本: {total_share:.2f}亿股  流通股本: {liq_share:.2f}亿股")
     if fp24 and fp24[3]:
-        print(f"  【对比2024年】ROE: {sp(fp24[3]):.2f}% → {roe_2025:.2f}% ({roe_2025 - sp(fp24[3]):+.1f}%)")
+        roe_2024 = sp(fp24[3])
+        rev_2024 = sf(fp24[8])
+        net_profit_2024 = sf(fp24[6])
+        yoy_rev = (rev_2025 - rev_2024) / rev_2024 * 100 if rev_2024 else None
+        print(f"  【对比2024年】")
+        print(f"    ROE: {roe_2024:.2f}% → {roe_2025:.2f}% ({roe_2025 - roe_2024:+.1f}%)")
+        if net_profit_2024:
+            ni_change = (net_profit_2025 - net_profit_2024) / abs(net_profit_2024) * 100
+            print(f"    净利润: {net_profit_2024/1e8:.2f}亿 → {net_profit_2025/1e8:.2f}亿 ({ni_change:+.1f}%)")
+        if yoy_rev:
+            print(f"    营收YOY: {yoy_rev:+.1f}%")
 
 if fg and fg[5]:
     yoy_ni  = sp(fg[5])
     yoy_eps = sp(fg[6])
-    print(f"  【成长能力】净利润YOY: {yoy_ni:+.1f}%  EPS_YOY: {yoy_eps:+.1f}%")
+    yoy_equity = sp(fg[3])
+    print(f"  【成长能力】")
+    print(f"    净利润YOY: {yoy_ni:+.1f}%")
+    print(f"    EPS_YOY: {yoy_eps:+.1f}%")
+    if yoy_equity:
+        print(f"    净资产YOY: {yoy_equity:+.1f}%")
 
 if fo and fo[3]:
     nrt = sf(fo[3])
     invt = sf(fo[5])
-    print(f"  【营运能力】应收周: {nrt:.1f}次  存货周: {invt:.1f}次")
+    cat = sf(fo[6])
+    print(f"  【营运能力】")
+    print(f"    应收周转率: {nrt:.1f}次（{sf(fo[4]):.0f}天）")
+    print(f"    存货周转率: {invt:.1f}次（{sf(fo[6]):.0f}天）")
+    print(f"    流动资产周转率: {cat:.1f}次")
+
+if fb and fb[3]:
+    current_ratio = sf(fb[3])
+    quick_ratio = sf(fb[4])
+    cash_ratio = sf(fb[5])
+    yoy_liability = sp(fb[6])
+    liability_to_asset = sp(fb[7])
+    asset_to_equity = sf(fb[8])
+    print(f"  【资产负债表】")
+    print(f"    流动比率: {current_ratio:.2f}{'(优秀)' if current_ratio>=2 else '(良好)' if current_ratio>=1 else '(偏弱)'}")
+    print(f"    速动比率: {quick_ratio:.2f}{'(优秀)' if quick_ratio>=1 else '(偏弱)'}")
+    print(f"    现金比率: {cash_ratio:.2f}")
+    print(f"    资产负债率: {liability_to_asset:.2f}%{'(低负债)' if liability_to_asset<40 else '(合理)' if liability_to_asset<60 else '(高负债⚠️)'}")
+    print(f"    资产负责率YOY: {yoy_liability:+.1f}%")
+    print(f"    产权比率: {asset_to_equity:.2f}")
+
+if fd and fd[3]:
+    dupont_equity_mul = sf(fd[4])  # 权益乘数 1.35
+    dupont_asset_turn = sf(fd[5])  # 资产周转率 0.73
+    dupont_tax_burden = sp(fd[8])  # 税负 burden 82.0%
+    dupont_operating_profit = sp(fd[6])  # 营业利润/净利润比率（恒等于1，跳过）
+    dupont_net_profit = sp(fd[7])  # 净利率 6.10%
+    dupont_roic = sf(fd[3])  # ROE = 6.06%
+    print(f"  【杜邦分析(ROE拆解)】")
+    print(f"    净利率: {dupont_net_profit:.2f}%")
+    print(f"    资产周转率: {dupont_asset_turn:.2f}次")
+    print(f"    权益乘数: {dupont_equity_mul:.2f}{'（低杠杆）' if dupont_equity_mul<2 else '（合理）' if dupont_equity_mul<3 else '（高杠杆⚠️）'}")
+    roe_dr = dupont_net_profit * dupont_asset_turn * dupont_equity_mul / 10000  # 三值均为%，需/10000
+    print(f"    → 杜邦ROE = 净利率×周转率×权益乘数 = {roe_dr:.2f}%")
+
+# —————— 财务综合评分 ——————
+fin_score = 0
+fin_detail = []
+
+if roe_2025:
+    if roe_2025 >= 15:   fin_score += 25
+    elif roe_2025 >= 10: fin_score += 18
+    elif roe_2025 >= 5:  fin_score += 10
+    elif roe_2025 >= 0:  fin_score += 3
+    else:                fin_score += 0
+    fin_detail.append(f"ROE={roe_2025:.1f}%")
+
+if yoy_ni is not None:
+    if yoy_ni >= 30:     fin_score += 25
+    elif yoy_ni >= 15:   fin_score += 18
+    elif yoy_ni >= 0:    fin_score += 10
+    elif yoy_ni >= -20:  fin_score += 3
+    else:                fin_score += 0
+    fin_detail.append(f"净利润YOY={yoy_ni:.1f}%")
+
+if yoy_rev is not None:
+    if yoy_rev >= 20:    fin_score += 20
+    elif yoy_rev >= 10:  fin_score += 14
+    elif yoy_rev >= 0:   fin_score += 7
+    elif yoy_rev >= -10: fin_score += 2
+    else:                fin_score += 0
+    fin_detail.append(f"营收YOY={yoy_rev:.1f}%")
+
+if liability_to_asset is not None:
+    if liability_to_asset < 30:  fin_score += 15
+    elif liability_to_asset < 50: fin_score += 10
+    elif liability_to_asset < 70: fin_score += 5
+    else:                        fin_score += 0
+    fin_detail.append(f"资产负债率={liability_to_asset:.1f}%")
+
+if current_ratio:
+    if current_ratio >= 2:    fin_score += 15
+    elif current_ratio >= 1: fin_score += 10
+    elif current_ratio >= 0.5: fin_score += 5
+    else:                    fin_score += 0
+    fin_detail.append(f"流动比率={current_ratio:.2f}")
+
+print(f"\n  【财务综合评分】{fin_score}/75")
+print(f"  评分维度: {', '.join(fin_detail) if fin_detail else '数据不足'}")
+
+FIN_SCORE = fin_score
+FIN_DETAIL = fin_detail
 
 
 # ============================================================
@@ -451,7 +554,11 @@ def generate_full_report(
         pe, pb, mkt, sector, price,
         roe_2025, np_margin, gp_margin, net_profit_2025,
         eps_2025, rev_2025, total_share, liq_share,
-        yoy_ni, yoy_eps, nrt, invt,
+        yoy_ni, yoy_eps, yoy_rev,
+        nrt, invt,
+        current_ratio, quick_ratio, liability_to_asset,
+        dupont_net_profit, dupont_asset_turn, dupont_equity_mul,
+        FIN_SCORE,
         avg_cost, benefit_part,
         chip_70_range, chip_90_range, chip_peak,
         vol_breakout, divergence_signal, volume_compressed,
@@ -840,7 +947,7 @@ def generate_full_report(
 
     # Step 5
     print(f"\n{sep}")
-    print(f"## Step 5 · 基本面验证（7项全列）")
+    print(f"## Step 5 · 基本面验证（7项+财务深度）")
     print(f"\n1. **全称**：{f10_data.get('ORG_NAME', stock_name) or stock_name}")
     print(f"2. **主营**：{f10_data.get('MAIN_BUSINESS', '数据获取失败')}")
     print(f"3. **收入结构**：{f10_data.get('INCOME_STRU_NAMENEW', '数据获取失败')}")
@@ -848,6 +955,26 @@ def generate_full_report(
     print(f"5. **地区**：{f10_data.get('REGIONBK', '数据获取失败')}")
     print(f"6. **上市日期**：{f10_data.get('LISTING_DATE', '数据获取失败')}")
     print(f"7. **题材概念**{'（'+str(len(concepts))+'个）' if concepts else ''}：{', '.join(concepts) if concepts else '数据获取失败'}")
+
+    # 财务深度数据（增强）
+    print(f"\n**【财务深度数据】**")
+    if roe_2025:
+        print(f"- ROE: {roe_2025:.2f}% | 净利率: {np_margin:.2f}% | 毛利率: {gp_margin:.2f}% | EPS: {eps_2025:.4f}元")
+        print(f"- 净利润: {net_profit_2025/1e8:.2f}亿 | 营收: {rev_2025/1e8:.2f}亿 | 总股本: {total_share:.2f}亿股")
+    if yoy_ni is not None:
+        print(f"- 净利润YOY: {yoy_ni:+.1f}% | 营收YOY: {yoy_rev:+.1f}% | EPS_YOY: {yoy_eps:+.1f}%")
+    if nrt:
+        print(f"- 应收周转: {nrt:.1f}次 | 存货周转: {invt:.1f}次")
+    if current_ratio:
+        cr_tag = '(优秀)' if current_ratio>=2 else '(良好)' if current_ratio>=1 else '(偏弱)'
+        la_tag = '(低)' if liability_to_asset<40 else '(合理)' if liability_to_asset<60 else '(高⚠️)'
+        print(f"- 流动比率: {current_ratio:.2f}{cr_tag} | 速动比率: {quick_ratio:.2f} | 资产负债率: {liability_to_asset:.2f}%{la_tag}")
+    if dupont_net_profit:
+        em_tag = '(低杠杆)' if dupont_equity_mul<2 else '(合理)' if dupont_equity_mul<3 else '(高杠杆⚠️)'
+        print(f"- 杜邦拆解: 净利率{dupont_net_profit:.2f}% × 周转率{dupont_asset_turn:.2f} × 权益乘数{dupont_equity_mul:.2f}{em_tag}")
+    fin_pct = round(FIN_SCORE/75*100) if FIN_SCORE else 0
+    stars = '⭐'*min(5,max(1,fin_pct//20))
+    print(f"\n- **财务综合评分**: {FIN_SCORE}/75（{stars}{'优秀' if fin_pct>=80 else '良好' if fin_pct>=60 else '一般' if fin_pct>=40 else '偏差'}）")
 
     # Step 6
     print(f"\n{sep}")
@@ -970,19 +1097,26 @@ def generate_full_report(
     else:
         core_conflict = f"均线{ma_arrangement}，{rsi_final}，趋势偏弱，核心看{stop_loss:.2f}能否守住"
 
+    # 基本面综合评分（75分制 → 百分制）
+    fin_basic_pct = round(FIN_SCORE / 75 * 100) if FIN_SCORE else 0
+    fin_stars = '⭐' * min(5, max(1, fin_basic_pct // 20))
+
     # 综合结论
     print(f"\n{sep}")
     print(f"## 综合研判")
-    print(f"\n**技术面**：{latest['date'].strftime('%Y-%m-%d')}收盘{last_close:.2f}元({pct_chg:+.2f}%)，"
+    print(f"\n**技术面（5维度）**：{latest['date'].strftime('%Y-%m-%d')}收盘{last_close:.2f}元({pct_chg:+.2f}%)，"
           f"{ma_arrangement}排列，{rsi_final}，"
           f"BOLL{'突破上轨' if pos_in_boll>1 else '轨道'+('上轨' if pos_in_boll>0.8 else '中部')+'运行'}，"
-          f"综合评分**{score}/100**（{trend}）。")
-    print(f"\n**基本面**：{pe_final}，{sector_final}板块，{'题材丰富' if len(concepts)>5 else '题材一般'}。")
+          f"技术评分**{score}/100**（{verdict.split('—')[0].strip()}）。")
+    fin_judge = '优秀' if fin_basic_pct>=80 else '良好' if fin_basic_pct>=60 else '一般' if fin_basic_pct>=40 else '偏差'
+    print(f"\n**基本面**：财务评分**{FIN_SCORE}/75**（{fin_stars}{fin_judge}），{pe_final}，{sector_final}板块，{'题材丰富' if len(concepts)>5 else '题材一般'}。")
     print(f"\n**核心矛盾**：{core_conflict}。")
     print(f"\n**最大机会**：{max_opportunity}。")
     print(f"\n**最大风险**：{max_risk}。")
-    if score >= 60:
-        print(f"\n**建议**：持股者持有为主，{last_close*0.95:.2f}元以上坚定持有；空仓者等回踩{ma20:.2f}~{last_close*0.95:.2f}低吸，或等突破{boll_u:.2f}确认后顺势而为。严格止损{stop_loss:.2f}。")
+    if score >= 60 and fin_basic_pct >= 60:
+        print(f"\n**建议**：技术面+基本面双优，持股者{last_close*0.95:.2f}元以上坚定持有；空仓者等回踩{ma20:.2f}~{last_close*0.95:.2f}低吸，或等突破{boll_u:.2f}确认后顺势。止损{stop_loss:.2f}。")
+    elif score >= 60:
+        print(f"\n**建议**：技术面不错但基本面一般，持股者持有为主，{last_close*0.95:.2f}元以上坚定持有；空仓者等回踩{ma20:.2f}~{last_close*0.95:.2f}低吸，或等突破{boll_u:.2f}确认后顺势而为。止损{stop_loss:.2f}。")
     elif score >= 45:
         print(f"\n**建议**：谨慎观望，等待{boll_u:.2f}放量突破确认再入；回调{ma20:.2f}附近企稳可轻仓试探。止损{stop_loss:.2f}。")
     else:
@@ -1006,7 +1140,11 @@ generate_full_report(
     eps_2025=eps_2025, rev_2025=rev_2025,
     total_share=total_share, liq_share=liq_share,
     yoy_ni=yoy_ni, yoy_eps=yoy_eps,
+    yoy_rev=yoy_rev,
     nrt=nrt, invt=invt,
+    current_ratio=current_ratio, quick_ratio=quick_ratio, liability_to_asset=liability_to_asset,
+    dupont_net_profit=dupont_net_profit, dupont_asset_turn=dupont_asset_turn, dupont_equity_mul=dupont_equity_mul,
+    FIN_SCORE=FIN_SCORE,
     avg_cost=avg_cost, benefit_part=benefit_part,
     chip_70_range=chip_70_range, chip_90_range=chip_90_range, chip_peak=chip_peak,
     vol_breakout=vol_breakout, divergence_signal=divergence_signal,
