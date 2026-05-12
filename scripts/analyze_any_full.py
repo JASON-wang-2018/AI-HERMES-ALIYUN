@@ -295,6 +295,48 @@ if r_val.get('result') and r_val['result'].get('data'):
     price  = vc.get('CLOSE_PRICE', 0) or 0
     print(f"  估值: PE={pe:.1f}  PB={pb:.2f}  市值={mkt:.0f}亿  板块={sector}  股价={price}")
 
+# ============================================================
+# 资金面数据采集（东财 fflow/daykline 接口）
+# f53=总净流 f54=超大单净流 f55=大单净流 f56=中单净流 f57=小单净流（万元）
+# 主力净流 = f54(超大单) + f55(大单)
+# ============================================================
+mf_main_net_w = 0      # 主力净流（万元）
+mf_total_w = 0         # 总成交额（万元）
+mf_main_pct = 0        # 主力净流占比%
+mf_days = 0            # 可用历史天数
+mf_net_list = []       # 近5日主力净流列表（万元）
+mf_has_history = False # 是否有5日历史数据
+
+mf_secid = ('0.' + code) if code.startswith(('0', '2', '3')) else ('1.' + code)
+url_mf = (
+    f"https://push2delay.eastmoney.com/api/qt/stock/fflow/daykline/get"
+    f"?lmt=5&klt=1&secid={mf_secid}"
+    f"&fields1=f1,f2,f3,f7&fields2=f51,f52,f53,f54,f55,f56,f57"
+)
+r_mf = curl_json(url_mf)
+if r_mf.get('data') and r_mf['data'].get('klines'):
+    klines = r_mf['data']['klines']
+    mf_days = len(klines)
+    mf_has_history = mf_days >= 5
+    mf_net_list = []
+    for kl in klines:
+        p = kl.split(',')
+        if len(p) >= 6:
+            # p[3]=超大单净流(元→转万元), p[4]=大单净流(元→转万元)
+            day_main_net = (float(p[3]) + float(p[4])) / 1e4  # 主力净流（万元）
+            mf_net_list.append(day_main_net)
+    if klines:
+        last_kl = klines[-1].split(',')
+        # p[2]=总成交额（元），p[3]=超大单净流(元)，p[4]=大单净流(元)
+        mf_total_y = float(last_kl[2])   # 总成交额（元）
+        mf_main_net_y = float(last_kl[3]) + float(last_kl[4])  # 主力净流（元）
+        mf_main_net_w = mf_main_net_y / 1e4  # 主力净流（万元）
+        # 用总成交额绝对值计算主力净流占比（避免p[2]为负的影响）
+        mf_main_pct = (mf_main_net_y / abs(mf_total_y) * 100) if mf_total_y != 0 else 0
+
+print(f"\n  【资金面】主力净流: {mf_main_net_w/1e4:+.2f}亿({mf_main_pct:+.1f}%) "
+      f"总成交额: {abs(mf_total_y)/1e8:.2f}亿 | 历史数据: {mf_days}天{'✅' if mf_has_history else '⚠️不足5日'}")
+
 # 行业均值（东财中文filter有bug，已在下方generate_report里兜底提示）
 # ============================================================
 # Step 5: 题材概念 (f129字段)
@@ -538,6 +580,64 @@ print(f"  评分维度: {', '.join(fin_detail) if fin_detail else '数据不足'
 FIN_SCORE = fin_score
 FIN_DETAIL = fin_detail
 
+# —————— 资金面综合评分（20分制）——————
+# 维度：近5日主力净流方向(8分) + 今日主力净流占比(6分) + 连续净流入天数(6分)
+cap_score = 0
+cap_detail = []
+
+# ① 近5日净流方向（8分）
+if mf_has_history and mf_net_list:
+    avg_net = sum(mf_net_list) / len(mf_net_list)
+    if avg_net > 5000:        # 日均主力净流入>5000万
+        cap_score += 8; cap_detail.append(f'5日净流入均{avg_net/1e4:+.2f}亿')
+    elif avg_net > 1000:
+        cap_score += 5; cap_detail.append(f'5日净流入均{avg_net/1e4:+.2f}亿')
+    elif avg_net > 0:
+        cap_score += 2; cap_detail.append(f'5日小幅净流入{avg_net/1e4:+.2f}亿')
+    elif avg_net > -1000:
+        cap_score += 0; cap_detail.append(f'5日轻微净流出{avg_net/1e4:+.2f}亿')
+    elif avg_net > -5000:
+        cap_score -= 3; cap_detail.append(f'5日净流出{-avg_net/1e4:.2f}亿')
+    else:
+        cap_score -= 6; cap_detail.append(f'5日大幅净流出{-avg_net/1e4:.2f}亿⚠️')
+else:
+    # 无5日历史，看今日单日
+    if mf_main_net_w > 5000:
+        cap_score += 4; cap_detail.append(f'今日主力净流入{mf_main_net_w/1e4:+.2f}亿(无5日历史)')
+    elif mf_main_net_w > 0:
+        cap_score += 1; cap_detail.append(f'今日小幅净流入{mf_main_net_w/1e4:+.2f}亿(无5日历史)')
+    elif mf_main_net_w > -3000:
+        cap_score -= 2; cap_detail.append(f'今日净流出{abs(mf_main_net_w)/1e4:.2f}亿(无5日历史)')
+
+# ② 今日主力净流占比（6分）
+if abs(mf_main_pct) > 15:
+    cap_score += 6; cap_detail.append(f'主力占比{mf_main_pct:+.1f}%(强势)')
+elif abs(mf_main_pct) > 8:
+    cap_score += 4; cap_detail.append(f'主力占比{mf_main_pct:+.1f}%(明显)')
+elif abs(mf_main_pct) > 3:
+    cap_score += 2; cap_detail.append(f'主力占比{mf_main_pct:+.1f}%(一般)')
+else:
+    cap_score += 0; cap_detail.append(f'主力占比{mf_main_pct:+.1f}%(偏弱)')
+
+# ③ 连续净流入天数（6分）
+if mf_has_history and mf_net_list:
+    pos_days = sum(1 for x in mf_net_list if x > 0)
+    if pos_days >= 4:
+        cap_score += 6; cap_detail.append(f'5日中{pos_days}日净流入(持续买入)')
+    elif pos_days >= 3:
+        cap_score += 4; cap_detail.append(f'5日中{pos_days}日净流入(偏多)')
+    elif pos_days >= 2:
+        cap_score += 1; cap_detail.append(f'5日中{pos_days}日净流入(分歧)')
+    else:
+        cap_score -= 2; cap_detail.append(f'5日中{pos_days}日净流入(偏空)')
+
+cap_score = max(0, min(20, cap_score))
+print(f"\n  【资金面综合评分】{cap_score}/20")
+print(f"  评分维度: {', '.join(cap_detail) if cap_detail else '数据不足'}")
+
+CAP_SCORE = cap_score
+CAP_DETAIL = cap_detail
+
 
 # ============================================================
 # 完整8步报告生成函数（宁波韵升格式）
@@ -558,6 +658,9 @@ def generate_full_report(
         current_ratio, quick_ratio, liability_to_asset,
         dupont_net_profit, dupont_asset_turn, dupont_equity_mul,
         FIN_SCORE,
+        CAP_SCORE,          # 资金面综合评分（20分制）
+        mf_main_net_w,      # 主力净流（万元）
+        mf_main_pct,        # 主力净流占比%
         avg_cost, benefit_part,
         chip_70_range, chip_90_range, chip_peak,
         vol_breakout, divergence_signal, volume_compressed,
@@ -926,6 +1029,46 @@ def generate_full_report(
         print(f"- {name}：**{val}{val_max}** — {note}")
     print(f"\n**【结论】**：{verdict}")
 
+    # —————— 综合评分（技术60% + 资金20% + 基本面20%）——————
+    # 技术面：100分制 → 60%权重
+    # 资金面：20分制 → 20%权重（→百分制后 = CAP_SCORE/20*100*20% = CAP_SCORE*1.0）
+    # 基本面：75分制 → 20%权重（→百分制后 = FIN_SCORE/75*100*20% = FIN_SCORE/75*20）
+    tech_pct  = score           # 技术60分（百分制）
+    cap_pct   = round(CAP_SCORE / 20 * 100)  # 资金面百分制
+    fin_pct   = round(FIN_SCORE / 75 * 100)  # 基本面百分制
+    comp_score = round(tech_pct * 0.60 + cap_pct * 0.20 + fin_pct * 0.20)  # 综合百分制
+    comp_tech = round(score * 0.60)       # 技术绝对分（60分满分）
+    comp_cap  = round(CAP_SCORE * 1.0)   # 资金绝对分（20分满分）
+    comp_fin  = round(FIN_SCORE / 75 * 20)  # 基本面绝对分（20分满分）
+
+    if comp_score >= 80:
+        comp_star = '⭐⭐⭐⭐⭐'
+        comp_judge = '极强'
+    elif comp_score >= 65:
+        comp_star = '⭐⭐⭐⭐'
+        comp_judge = '较强'
+    elif comp_score >= 50:
+        comp_star = '⭐⭐⭐'
+        comp_judge = '中等'
+    elif comp_score >= 35:
+        comp_star = '⭐⭐'
+        comp_judge = '偏差'
+    else:
+        comp_star = '⭐'
+        comp_judge = '极弱'
+
+    print(f"\n{sep}")
+    print(f"## 综合评分 · 技术60% + 资金20% + 基本面20%")
+    print(f"\n**【三维评分】**")
+    print(f"- **技术面**（{d1+d2+d3+d4+d5}/100 → ×60%）：{score}分 → **{comp_tech}/60分**")
+    cap_star = '⭐' * min(5, max(1, cap_pct // 20))
+    print(f"- **资金面**（CAP/20 → ×20%）：{cap_pct}分{cap_star} → **{comp_cap}/20分**")
+    fin_star = '⭐' * min(5, max(1, fin_pct // 20))
+    fin_judge2 = '优秀' if fin_pct>=80 else '良好' if fin_pct>=60 else '一般' if fin_pct>=40 else '偏差'
+    print(f"- **基本面**（FIN/75 → ×20%）：{fin_pct}分{fin_star}（{fin_judge2}） → **{comp_fin}/20分**")
+    print(f"\n**【综合总分】：{comp_score}/100 {comp_star}（{comp_judge}）**")
+    print(f"  = 技术{comp_tech}分({score}×60%) + 资金{comp_cap}分({CAP_SCORE}/20×100×20%) + 基本{comp_fin}分({FIN_SCORE}/75×100×20%)")
+
     # Step 4
     print(f"\n{sep}")
     print(f"## Step 4 · 风控要点")
@@ -1100,6 +1243,12 @@ def generate_full_report(
     fin_basic_pct = round(FIN_SCORE / 75 * 100) if FIN_SCORE else 0
     fin_stars = '⭐' * min(5, max(1, fin_basic_pct // 20))
 
+    # 资金面显示
+    mf_sign = '净流入' if mf_main_net_w > 0 else '净流出'
+    mf_abs = abs(mf_main_net_w) / 1e4
+    mf_level = '大额' if mf_abs > 1 else ('中等' if mf_abs > 0.3 else '小额')
+    cap_level = '资金活跃' if CAP_SCORE >= 14 else ('资金偏多' if CAP_SCORE >= 8 else ('资金中性' if CAP_SCORE >= 4 else '资金偏弱'))
+
     # 综合结论
     print(f"\n{sep}")
     print(f"## 综合研判")
@@ -1108,18 +1257,17 @@ def generate_full_report(
           f"BOLL{'突破上轨' if pos_in_boll>1 else '轨道'+('上轨' if pos_in_boll>0.8 else '中部')+'运行'}，"
           f"技术评分**{score}/100**（{verdict.split('—')[0].strip()}）。")
     fin_judge = '优秀' if fin_basic_pct>=80 else '良好' if fin_basic_pct>=60 else '一般' if fin_basic_pct>=40 else '偏差'
+    print(f"\n**资金面**：今日主力{mf_level}{mf_sign}{mf_abs:.2f}亿（占比{mf_main_pct:+.1f}%），{cap_level}（资金面评分{CAP_SCORE}/20）。")
     print(f"\n**基本面**：财务评分**{FIN_SCORE}/75**（{fin_stars}{fin_judge}），{pe_final}，{sector_final}板块，{'题材丰富' if len(concepts)>5 else '题材一般'}。")
     print(f"\n**核心矛盾**：{core_conflict}。")
     print(f"\n**最大机会**：{max_opportunity}。")
     print(f"\n**最大风险**：{max_risk}。")
-    if score >= 60 and fin_basic_pct >= 60:
-        print(f"\n**建议**：技术面+基本面双优，持股者{last_close*0.95:.2f}元以上坚定持有；空仓者等回踩{ma20:.2f}~{last_close*0.95:.2f}低吸，或等突破{boll_u:.2f}确认后顺势。止损{stop_loss:.2f}。")
-    elif score >= 60:
-        print(f"\n**建议**：技术面不错但基本面一般，持股者持有为主，{last_close*0.95:.2f}元以上坚定持有；空仓者等回踩{ma20:.2f}~{last_close*0.95:.2f}低吸，或等突破{boll_u:.2f}确认后顺势而为。止损{stop_loss:.2f}。")
-    elif score >= 45:
-        print(f"\n**建议**：谨慎观望，等待{boll_u:.2f}放量突破确认再入；回调{ma20:.2f}附近企稳可轻仓试探。止损{stop_loss:.2f}。")
+    if comp_score >= 65 and fin_basic_pct >= 60:
+        print(f"\n**建议**：三维共振较强（综合{comp_score}/100），技术+资金+基本面联动，持股者{last_close*0.95:.2f}元以上坚定持有；空仓者等回踩{ma20:.2f}~{last_close*0.95:.2f}低吸。止损{stop_loss:.2f}。")
+    elif comp_score >= 50:
+        print(f"\n**建议**：综合评分中等（{comp_score}/100），等待{boll_u:.2f}放量突破确认再入；回调{ma20:.2f}附近企稳可轻仓试探。止损{stop_loss:.2f}。")
     else:
-        print(f"\n**建议**：短线博弈为主，快进快出；回调{ma20:.2f}企稳再考虑。止损{stop_loss:.2f}，不恋战。")
+        print(f"\n**建议**：综合评分偏弱（{comp_score}/100），短线博弈为主，快进快出；回调{ma20:.2f}企稳再考虑。止损{stop_loss:.2f}，不恋战。")
     print(f"\n{sep}")
 
 
@@ -1144,6 +1292,9 @@ generate_full_report(
     current_ratio=current_ratio, quick_ratio=quick_ratio, liability_to_asset=liability_to_asset,
     dupont_net_profit=dupont_net_profit, dupont_asset_turn=dupont_asset_turn, dupont_equity_mul=dupont_equity_mul,
     FIN_SCORE=FIN_SCORE,
+    CAP_SCORE=CAP_SCORE,
+    mf_main_net_w=mf_main_net_w,
+    mf_main_pct=mf_main_pct,
     avg_cost=avg_cost, benefit_part=benefit_part,
     chip_70_range=chip_70_range, chip_90_range=chip_90_range, chip_peak=chip_peak,
     vol_breakout=vol_breakout, divergence_signal=divergence_signal,
