@@ -258,15 +258,25 @@ def print_chip_report(chip: ChipData, stock_code: str = "") -> None:
 
 
 # ============================================================
-# 测试：以600351亚宝药业为例
+# 筹码分布分析（支持命令行参数）
+# 用法：python chip_distribution.py 600351
+#       python chip_distribution.py 002642
 # ============================================================
 if __name__ == "__main__":
-    import sqlite3, baostock as bs
+    import sqlite3, baostock as bs, sys
 
-    code = "600351"
+    # 支持命令行传入股票代码，默认600351
+    code = sys.argv[1] if len(sys.argv) > 1 else "600351"
+    # 自动判断交易所前缀
+    raw_code = code
+    if code.startswith(("0", "3", "8", "4")):
+        bs_code = f"sz.{code}"
+    else:
+        bs_code = f"sh.{code}"
+
     bs.login()
     rs = bs.query_history_k_data_plus(
-        f"sh.{code}",
+        bs_code,
         "date,open,high,low,close,volume,amount,pctChg",
         start_date="2024-07-01", end_date="2026-04-30",
         frequency="d", adjustflag="2"
@@ -297,4 +307,7 @@ if __name__ == "__main__":
         trading_days=210,
         target_date=None  # 取最后一日
     )
-    print_chip_report(chip, code)
+
+    # 传入原始股票代码（如"002642"）用于显示
+    print_chip_report(chip, stock_code=raw_code)
+    chip_analysis_text(chip, stock_code=raw_code, close_price=df["close"].iloc[-1])
